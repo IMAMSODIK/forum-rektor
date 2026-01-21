@@ -1,0 +1,16 @@
+satuan kerja pakai master (done)
+status kamar ganti jadi pilihan kamar (done)
+munucul kan total hari (2 hari) lalu munculkan total pembayaran (done)
+upload bukti pembayaran
+
+
+status kamar : 
+1 akamar 1 orang (single) / malam (done)
+1 kamar 2 orang (twin) / malam (done)
+
+
+informasi lebih lanjut hubungi panitia sandhi (nomor wa)
+informasi lokasi hotel: hotel grand city hall
+
+hilangkan
+ukuran baju
