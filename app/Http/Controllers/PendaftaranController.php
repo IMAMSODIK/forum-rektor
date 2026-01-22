@@ -31,8 +31,8 @@ class PendaftaranController extends Controller
                 'jam'           => 'nullable',
                 'maskapai'      => 'nullable|string',
                 'kamar'         => 'required|string',
-                'foto'          => 'required|file|max:20000',
-                'bb'            => 'required|file|max:20000',
+                'foto' => 'required|file|mimetypes:image/jpeg,image/png,application/pdf|max:20000',
+                'bb'   => 'required|file|mimetypes:image/jpeg,image/png,application/pdf|max:20000',
             ], [
                 'nama.required'         => 'Nama wajib diisi.',
 
@@ -51,11 +51,16 @@ class PendaftaranController extends Controller
                 'satker.required'       => 'Satker wajib diisi.',
                 'kamar.required'        => 'Status kamar wajib dipilih.',
 
-                'foto.required'         => 'Foto wajib diupload.',
-                'foto.max'              => 'Ukuran foto maksimal 10MB.',
+                'foto.required'   => 'Foto wajib diupload.',
+                'foto.file'       => 'File foto tidak valid.',
+                'foto.mimes'      => 'Foto harus berupa file JPG, JPEG, PNG, atau PDF.',
+                'foto.max'        => 'Ukuran foto maksimal 20MB.',
 
-                'bb.required'         => 'Bukti Bayar wajib diupload.',
-                'bb.max'              => 'Ukuran Bukti Bayar maksimal 10MB.'
+                'bb.required'     => 'Bukti Bayar wajib diupload.',
+                'bb.file'         => 'File Bukti Bayar tidak valid.',
+                'bb.mimes'        => 'Bukti Bayar harus berupa file JPG, JPEG, PNG, atau PDF.',
+                'bb.max'          => 'Ukuran Bukti Bayar maksimal 20MB.',
+
             ]);
 
             $fotoPath = null;
@@ -115,7 +120,7 @@ class PendaftaranController extends Controller
                 'pangkat'       => 'required|string',
                 'no_hp'         => 'required|digits_between:8,15|unique:pesertas,no_hp',
                 'jabatan'       => 'required|string|max:255',
-                'foto'          => 'required|file|max:20000',
+                'foto' => 'required|file|mimes:jpg,jpeg,png,pdf|max:20000',
             ], [
                 'nama.required'         => 'Nama wajib diisi.',
 
@@ -132,8 +137,10 @@ class PendaftaranController extends Controller
                 'pangkat.required'      => 'Pangkat wajib dipilih.',
                 'jabatan.required'      => 'Jabatan wajib diisi.',
 
-                'foto.required'         => 'Foto wajib diupload.',
-                'foto.max'              => 'Ukuran foto maksimal 10MB.'
+                'foto.required'   => 'Foto wajib diupload.',
+                'foto.file'       => 'File foto tidak valid.',
+                'foto.mimes'      => 'Foto harus berupa file JPG, JPEG, PNG, atau PDF.',
+                'foto.max'        => 'Ukuran foto maksimal 10MB.',
             ]);
 
             $fotoPath = null;

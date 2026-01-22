@@ -683,8 +683,7 @@
 
                     <div class="form-group">
                         <label class="required">Upload Foto</label>
-                        <input type="file" id="foto" name="foto" class="form-control"
-                            required>
+                        <input type="file" id="foto" name="foto" class="form-control" required>
                         <div id="fileName" class="file-name">Belum ada file yang dipilih</div>
                         <img id="previewImage">
                     </div>
@@ -758,36 +757,36 @@
 
                     <div class="form-group">
                         <div class="payment-info">
-                                <h5>
-                                    <i class="fas fa-university"></i> Informasi Rekening Pembayaran
-                                </h5>
+                            <h5>
+                                <i class="fas fa-university"></i> Informasi Rekening Pembayaran
+                            </h5>
 
-                                <ul>
-                                    <li>
-                                        <i class="fas fa-credit-card"></i>
-                                        <strong>Bank</strong> : BSI (Bank Syariah Indonesia)
-                                    </li>
-                                    <li>
-                                        <i class="fas fa-hashtag"></i>
-                                        <strong>No. Rekening</strong> : 7329973818
-                                    </li>
-                                    <li>
-                                        <i class="fas fa-user"></i>
-                                        <strong>Atas Nama</strong> : Dwi Sandhi Romadhon
-                                    </li>
-                                </ul>
+                            <ul>
+                                <li>
+                                    <i class="fas fa-credit-card"></i>
+                                    <strong>Bank</strong> : BSI (Bank Syariah Indonesia)
+                                </li>
+                                <li>
+                                    <i class="fas fa-hashtag"></i>
+                                    <strong>No. Rekening</strong> : 7329973818
+                                </li>
+                                <li>
+                                    <i class="fas fa-user"></i>
+                                    <strong>Atas Nama</strong> : Dwi Sandhi Romadhon
+                                </li>
+                            </ul>
 
-                                <p class="note">
-                                    <i class="fas fa-info-circle"></i>
-                                    Mohon melakukan pembayaran sesuai total yang tertera dan Bukti Transfer Diupload untuk Dilakukan Validasi Pembayaran
-                                </p>
-                            </div>
+                            <p class="note">
+                                <i class="fas fa-info-circle"></i>
+                                Mohon melakukan pembayaran sesuai total yang tertera dan Bukti Transfer Diupload untuk
+                                Dilakukan Validasi Pembayaran
+                            </p>
+                        </div>
                     </div>
 
                     <div class="form-group">
                         <label class="required">Upload Bukti Pembayaran</label>
-                        <input type="file" id="bb" name="bb" class="form-control"
-                            required>
+                        <input type="file" id="bb" name="bb" class="form-control" required>
                         <div id="fileName2" class="file-name">Belum ada file yang dipilih</div>
                         <img id="previewImage2">
                     </div>
@@ -911,32 +910,61 @@
             const fileName = file ? file.name : 'Belum ada file yang dipilih';
             document.getElementById('fileName').textContent = fileName;
 
-            if (file) {
+            const preview = document.getElementById('previewImage');
+
+            // reset preview
+            preview.style.display = 'none';
+            preview.src = '';
+
+            if (!file) return;
+
+            // jika file PDF, jangan preview
+            if (file.type === 'application/pdf') {
+                return;
+            }
+
+            // hanya preview jika file gambar
+            if (file.type.startsWith('image/')) {
                 const reader = new FileReader();
                 reader.onload = function(event) {
-                    const preview = document.getElementById('previewImage');
                     preview.src = event.target.result;
                     preview.style.display = 'block';
                 };
                 reader.readAsDataURL(file);
             }
         });
+
 
         document.getElementById('bb').addEventListener('change', function(e) {
             const file = e.target.files[0];
             const fileName = file ? file.name : 'Belum ada file yang dipilih';
             document.getElementById('fileName2').textContent = fileName;
 
-            if (file) {
+            const preview = document.getElementById('previewImage2');
+
+            // reset preview
+            preview.style.display = 'none';
+            preview.src = '';
+
+            if (!file) return;
+
+            // jika PDF, jangan preview
+            if (file.type === 'application/pdf') {
+                return;
+            }
+
+            // preview hanya untuk gambar
+            if (file.type.startsWith('image/')) {
                 const reader = new FileReader();
                 reader.onload = function(event) {
-                    const preview = document.getElementById('previewImage2');
                     preview.src = event.target.result;
                     preview.style.display = 'block';
                 };
                 reader.readAsDataURL(file);
             }
         });
+    </script>
+
     </script>
 
     {{-- cari satuan kerja --}}
