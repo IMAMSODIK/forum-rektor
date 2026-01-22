@@ -701,7 +701,7 @@
 
                         <div class="form-group total">
                             <label class="required">Total Pembayaran</label>
-                            <input type="text" id="total_bayar" class="form-control" value="Rp. 2.800.000">
+                            <input type="text" id="total_bayar" class="form-control" value="Rp. 2.800.000" readonly>
                         </div>
                     </div>
 
