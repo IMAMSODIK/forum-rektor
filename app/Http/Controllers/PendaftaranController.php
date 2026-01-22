@@ -21,6 +21,7 @@ class PendaftaranController extends Controller
         try {
             $validated = $request->validate([
                 'nama'          => 'required|string|max:255',
+                'gender'        => 'required|string|max:255',
                 'nip'           => 'required|digits_between:1,20|unique:pesertas,nip',
                 'pangkat'       => 'required|string',
                 'no_hp'         => 'required|digits_between:8,15|unique:pesertas,no_hp',
@@ -34,6 +35,8 @@ class PendaftaranController extends Controller
                 'bb'          => 'required|image|mimes:jpg,jpeg,png|max:10000'
             ], [
                 'nama.required'         => 'Nama wajib diisi.',
+
+                'gender.required'         => 'Gender wajib diisi.',
 
                 'nip.required'          => 'NIP wajib diisi.',
                 'nip.digits_between'    => 'NIP harus berisi antara 1 sampai 20 digit angka.',
@@ -72,6 +75,7 @@ class PendaftaranController extends Controller
 
             Peserta::create([
                 'nama'              => $validated['nama'],
+                'gender'              => $validated['gender'],
                 'nip'               => $validated['nip'],
                 'no_hp'               => $validated['no_hp'],
                 'pangkat'           => $validated['pangkat'],
@@ -110,6 +114,7 @@ class PendaftaranController extends Controller
         try {
             $validated = $request->validate([
                 'nama'          => 'required|string|max:255',
+                'gender'        => 'required|string|max:255',
                 'nip'           => 'required|digits_between:1,20|unique:pesertas,nip',
                 'pangkat'       => 'required|string',
                 'no_hp'         => 'required|digits_between:8,15|unique:pesertas,no_hp',
@@ -117,6 +122,8 @@ class PendaftaranController extends Controller
                 'foto'          => 'required|image|mimes:jpg,jpeg,png|max:10000'
             ], [
                 'nama.required'         => 'Nama wajib diisi.',
+
+                'gender.required'         => 'Gender wajib diisi.',
 
                 'nip.required'          => 'NIP wajib diisi.',
                 'nip.digits_between'    => 'NIP harus berisi antara 1 sampai 20 digit angka.',
@@ -143,6 +150,7 @@ class PendaftaranController extends Controller
 
             Peserta::create([
                 'nama'              => $validated['nama'],
+                'gender'              => $validated['gender'],
                 'nip'               => $validated['nip'],
                 'no_hp'               => $validated['no_hp'],
                 'pangkat'           => $validated['pangkat'],

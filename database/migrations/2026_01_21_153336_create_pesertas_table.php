@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('pangkat');
             $table->string('jabatan');
             $table->string('satker');
+            $table->string('gender');
             $table->date('tanggal_kedatangan')->nullable();
             $table->time('jam_kedatangan')->nullable();
             $table->string('maskapai')->nullable();

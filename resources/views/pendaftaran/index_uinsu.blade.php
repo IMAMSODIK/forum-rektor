@@ -7,6 +7,7 @@
     <title>Formulir Kedatangan Tamu</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <style>
         :root {
             --primary: #4274BA;
@@ -260,30 +261,44 @@
     <div class="container">
 
         @if (session('error'))
-            <div
-                style="padding: 12px; background:#ffdddd; border-left:4px solid #e74c3c; margin-bottom:15px; border-radius:5px;">
-                {{ session('error') }}
-            </div>
+            <script>
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Gagal!',
+                    text: @json(session('error')),
+                    confirmButtonColor: '#e74c3c'
+                });
+            </script>
         @endif
 
         @if ($errors->any())
-            <div
-                style="padding: 12px; background:#fff3cd; border-left:4px solid #f1c40f; margin-bottom:15px; border-radius:5px;">
-                <strong>Periksa kembali input Anda:</strong>
-                <ul style="margin-top:8px; padding-left:20px;">
-                    @foreach ($errors->all() as $error)
-                        <li>{{ $error }}</li>
-                    @endforeach
-                </ul>
-            </div>
+            <script>
+                Swal.fire({
+                    icon: 'warning',
+                    title: 'Periksa kembali input Anda',
+                    html: `
+                        <ul style="text-align:left; margin-left:20px;">
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    `,
+                    confirmButtonColor: '#f1c40f'
+                });
+            </script>
         @endif
 
         @if (session('success'))
-            <div
-                style="padding: 12px; background:#d4edda; border-left:4px solid #27ae60; margin-bottom:15px; border-radius:5px;">
-                {{ session('success') }}
-            </div>
+            <script>
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Berhasil!',
+                    text: @json(session('success')),
+                    confirmButtonColor: '#27ae60'
+                });
+            </script>
         @endif
+
 
         <!-- 🔵 Flayer Paling Atas -->
         <div class="flayer-section">
@@ -291,8 +306,8 @@
         </div>
 
         <div class="form-header">
-            <h1>Formulir Pendaftaran Peserta</h1>
-            <p>Silakan lengkapi data diri Anda dengan benar</p>
+            <h1>Formulir Pendaftaran</h1>
+            <p>Forum Rektor PTKIN Kementerian Agama RI Tahun 2026</p>
         </div>
 
         <form action="/pendaftaran-uinsu" method="post" enctype="multipart/form-data">
@@ -307,6 +322,15 @@
                         <label class="required">Nama</label>
                         <input type="text" name="nama" value="{{ old('nama') }}" class="form-control"
                             placeholder="Masukkan nama lengkap" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="required">Gender</label>
+                        <select name="gender" class="form-control" value="{{ old('gender') }}" required>
+                            <option value="" {{ old('gender') == 'Laki-laki' ? 'selected' : '' }}>:: Pilih Gender ::</option>
+                            <option value="Laki-laki" {{ old('gender') == 'Laki-laki' ? 'selected' : '' }}>Laki-laki</option>
+                            <option value="Perempuan" {{ old('gender') == 'Perempuan' ? 'selected' : '' }}>Perempuan</option>
+                        </select>
                     </div>
 
                     <div class="form-group">
@@ -408,7 +432,6 @@
             </div>
         </div>
     </div>
-
 
     <script>
         // 🔒 NIP hanya angka

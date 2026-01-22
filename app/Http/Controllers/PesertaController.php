@@ -43,11 +43,12 @@ class PesertaController extends Controller
         }
 
         if ($request->hasFile('bb')) {
-            $foto = $request->file('bb')->store('bukti_bayar', 'public');
+            $bb = $request->file('bb')->store('bukti_bayar', 'public');
         }
 
         Peserta::create([
             'nama' => $request->nama,
+            'gender' => $request->gender,
             'nip' => $request->nip,
             'no_hp' => $request->no_hp,
             'pangkat' => $request->pangkat,
@@ -57,7 +58,7 @@ class PesertaController extends Controller
             'jam_kedatangan' => $request->jam_kedatangan,
             'maskapai' => $request->maskapai,
             'foto' => $foto,
-            'bb' => $foto,
+            'bb' => $bb,
         ]);
 
         return response()->json([
@@ -87,6 +88,7 @@ class PesertaController extends Controller
 
             $request->validate([
                 'nama' => 'required',
+                'gender' => 'required|string|max:255',
                 'nip' => 'required',
                 'no_hp' => 'required',
                 'pangkat' => 'required',
