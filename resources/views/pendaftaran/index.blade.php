@@ -665,8 +665,8 @@
                         <label class="required">Pilih Kamar</label>
                         <select name="kamar" id="kamar" class="form-control" value="{{ old('kamar') }}"
                             required>
-                            <option value="Single">Single | 1 Kamar • 1 Tamu • Rp 900.000/malam</option>
-                            <option value="Twin">Twin | 1 Kamar • 2 Tamu • Rp 600.000/malam</option>
+                            <option value="Single">Single | 1 Kamar • 1 Tamu • Rp 1.400.000/malam</option>
+                            <option value="Twin">Twin | 1 Kamar • 2 Tamu • Rp 800.000/malam</option>
                         </select>
                     </div>
 
@@ -678,7 +678,7 @@
 
                         <div class="form-group total">
                             <label class="required">Total Pembayaran</label>
-                            <input type="text" id="total_bayar" class="form-control" value="Rp. 0.00">
+                            <input type="text" id="total_bayar" class="form-control" value="Rp. 2.800.000">
                         </div>
                     </div>
 
@@ -790,9 +790,9 @@
         $("#kamar").on("change", function() {
             let val = $(this).val();
             if (val == 'Single') {
-                $("#total_bayar").val(formatRupiah(900000 * 2));
+                $("#total_bayar").val(formatRupiah(1400000 * 2));
             } else {
-                $("#total_bayar").val(formatRupiah(600000 * 2));
+                $("#total_bayar").val(formatRupiah(800000 * 2));
             }
         })
     </script>
@@ -921,10 +921,11 @@
         // Filter data berdasarkan input pencarian
         function filterCampus(searchTerm) {
             const filteredData = campusData.filter(campus => {
-                return campus.name.toLowerCase().includes(searchTerm.toLowerCase());
+                return campus.nama.toLowerCase().includes(searchTerm.toLowerCase());
             });
             renderTable(filteredData);
         }
+
 
         // Live search event listener
         searchInput.addEventListener('input', (e) => {

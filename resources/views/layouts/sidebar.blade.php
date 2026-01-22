@@ -62,7 +62,7 @@
                     <a class="sidebar-link sidebar-title" href="/pengaturan-kamar">
                         <i class="fa fa-door-open text-white"></i>
                         <span class="">Pengaturan Kamar</span>
-                    </a>
+                </a>
                 </li> --}}
 
                 <li class="sidebar-main-title">
