@@ -695,7 +695,7 @@
 
                     <div class="form-row-custom">
                         <div class="form-group acara">
-                            <label class="required">Acara Berlangsung</label>
+                            <label class="required">Jumlah Malam</label>
                             <input type="text" value="2 Malam" readonly class="form-control">
                         </div>
 
