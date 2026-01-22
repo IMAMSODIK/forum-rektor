@@ -768,7 +768,7 @@
                                 </li>
                                 <li>
                                     <i class="fas fa-hashtag"></i>
-                                    <strong>No. Rekening</strong> : 7329973818
+                                    <strong>No. Rekening</strong> : 7084334159
                                 </li>
                                 <li>
                                     <i class="fas fa-user"></i>
