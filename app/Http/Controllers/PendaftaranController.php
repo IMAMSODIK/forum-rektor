@@ -31,8 +31,8 @@ class PendaftaranController extends Controller
                 'jam'           => 'nullable',
                 'maskapai'      => 'nullable|string',
                 'kamar'         => 'required|string',
-                'foto'          => 'required|image|mimes:jpg,jpeg,png|max:10000',
-                'bb'          => 'required|image|mimes:jpg,jpeg,png|max:10000'
+                'foto'          => 'required|file|max:20000',
+                'bb'            => 'required|file|max:20000',
             ], [
                 'nama.required'         => 'Nama wajib diisi.',
 
@@ -52,13 +52,9 @@ class PendaftaranController extends Controller
                 'kamar.required'        => 'Status kamar wajib dipilih.',
 
                 'foto.required'         => 'Foto wajib diupload.',
-                'foto.image'            => 'File harus berupa gambar.',
-                'foto.mimes'            => 'Format foto harus JPG, JPEG, atau PNG.',
                 'foto.max'              => 'Ukuran foto maksimal 10MB.',
 
                 'bb.required'         => 'Bukti Bayar wajib diupload.',
-                'bb.image'            => 'File harus berupa gambar.',
-                'bb.mimes'            => 'Format Bukti Bayar harus JPG, JPEG, atau PNG.',
                 'bb.max'              => 'Ukuran Bukti Bayar maksimal 10MB.'
             ]);
 
@@ -119,7 +115,7 @@ class PendaftaranController extends Controller
                 'pangkat'       => 'required|string',
                 'no_hp'         => 'required|digits_between:8,15|unique:pesertas,no_hp',
                 'jabatan'       => 'required|string|max:255',
-                'foto'          => 'required|image|mimes:jpg,jpeg,png|max:10000'
+                'foto'          => 'required|file|max:20000',
             ], [
                 'nama.required'         => 'Nama wajib diisi.',
 
@@ -137,8 +133,6 @@ class PendaftaranController extends Controller
                 'jabatan.required'      => 'Jabatan wajib diisi.',
 
                 'foto.required'         => 'Foto wajib diupload.',
-                'foto.image'            => 'File harus berupa gambar.',
-                'foto.mimes'            => 'Format foto harus JPG, JPEG, atau PNG.',
                 'foto.max'              => 'Ukuran foto maksimal 10MB.'
             ]);
 

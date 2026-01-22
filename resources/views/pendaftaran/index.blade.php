@@ -683,7 +683,7 @@
 
                     <div class="form-group">
                         <label class="required">Upload Foto</label>
-                        <input type="file" id="foto" name="foto" class="form-control" accept="image/*"
+                        <input type="file" id="foto" name="foto" class="form-control"
                             required>
                         <div id="fileName" class="file-name">Belum ada file yang dipilih</div>
                         <img id="previewImage">
@@ -786,7 +786,7 @@
 
                     <div class="form-group">
                         <label class="required">Upload Bukti Pembayaran</label>
-                        <input type="file" id="bb" name="bb" class="form-control" accept="image/*"
+                        <input type="file" id="bb" name="bb" class="form-control"
                             required>
                         <div id="fileName2" class="file-name">Belum ada file yang dipilih</div>
                         <img id="previewImage2">
