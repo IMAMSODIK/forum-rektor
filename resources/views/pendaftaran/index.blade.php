@@ -487,6 +487,53 @@
             font-size: 1.2rem;
         }
     </style>
+
+    <style>
+        .payment-info {
+            margin-top: 20px;
+            padding: 16px;
+            background: #f8fafc;
+            border-left: 4px solid #2563eb;
+            border-radius: 6px;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .payment-info h5 {
+            margin-bottom: 12px;
+            font-size: 1.1rem;
+            color: #1e3a8a;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .payment-info ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .payment-info ul li {
+            margin-bottom: 8px;
+            color: #374151;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .payment-info ul li i {
+            color: #2563eb;
+        }
+
+        .payment-info .note {
+            margin-top: 12px;
+            font-size: 0.9rem;
+            color: #6b7280;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+    </style>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 
@@ -560,9 +607,12 @@
                     <div class="form-group">
                         <label class="required">Gender</label>
                         <select name="gender" class="form-control" value="{{ old('gender') }}" required>
-                            <option value="" {{ old('gender') == 'Laki-laki' ? 'selected' : '' }}>:: Pilih Gender ::</option>
-                            <option value="Laki-laki" {{ old('gender') == 'Laki-laki' ? 'selected' : '' }}>Laki-laki</option>
-                            <option value="Perempuan" {{ old('gender') == 'Perempuan' ? 'selected' : '' }}>Perempuan</option>
+                            <option value="" {{ old('gender') == 'Laki-laki' ? 'selected' : '' }}>:: Pilih Gender
+                                ::</option>
+                            <option value="Laki-laki" {{ old('gender') == 'Laki-laki' ? 'selected' : '' }}>Laki-laki
+                            </option>
+                            <option value="Perempuan" {{ old('gender') == 'Perempuan' ? 'selected' : '' }}>Perempuan
+                            </option>
                         </select>
                     </div>
 
@@ -701,8 +751,37 @@
 
                         <div class="form-group total">
                             <label class="required">Total Pembayaran</label>
-                            <input type="text" id="total_bayar" class="form-control" value="Rp. 2.800.000" readonly>
+                            <input type="text" id="total_bayar" class="form-control" value="Rp. 2.800.000"
+                                readonly>
                         </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="payment-info">
+                                <h5>
+                                    <i class="fas fa-university"></i> Informasi Rekening Pembayaran
+                                </h5>
+
+                                <ul>
+                                    <li>
+                                        <i class="fas fa-credit-card"></i>
+                                        <strong>Bank</strong> : BSI (Bank Syariah Indonesia)
+                                    </li>
+                                    <li>
+                                        <i class="fas fa-hashtag"></i>
+                                        <strong>No. Rekening</strong> : 7329973818
+                                    </li>
+                                    <li>
+                                        <i class="fas fa-user"></i>
+                                        <strong>Atas Nama</strong> : Dwi Sandhi Romadhon
+                                    </li>
+                                </ul>
+
+                                <p class="note">
+                                    <i class="fas fa-info-circle"></i>
+                                    Mohon melakukan pembayaran sesuai total yang tertera dan Bukti Transfer Diupload untuk Dilakukan Validasi Pembayaran
+                                </p>
+                            </div>
                     </div>
 
                     <div class="form-group">
