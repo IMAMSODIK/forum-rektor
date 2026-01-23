@@ -15,7 +15,7 @@ use App\Http\Controllers\PendaftaranController;
 use App\Http\Controllers\PesertaController;
 use App\Http\Controllers\RegistrasiNarasumberController;
 use App\Http\Controllers\RegistrasiPesertaController;
-use App\Models\PengaturanKamar;
+use App\Http\Controllers\PengaturanKamar;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {

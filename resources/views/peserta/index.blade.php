@@ -1,5 +1,15 @@
 @extends('layouts.template')
 
+@section('own_style')
+    <style>
+        .input-active {
+            border-color: #86b7fe;
+            box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, .25);
+            background-color: #fff;
+        }
+    </style>
+@endsection
+
 @section('content')
     <div class="container-fluid">
         <div class="page-title">
@@ -37,14 +47,13 @@
                                     <tr>
                                         <th class="text-center align-middle">No</th>
                                         <th class="text-center align-middle">Peserta</th>
-                                        <th class="text-center align-middle">Tipe Kamar</th>
-                                        <th class="text-center align-middle">Ukuran Baju</th>
                                         <th class="text-center align-middle">No. Handphone</th>
                                         <th class="text-center align-middle" style="width: 15%">Satuan Kerja</th>
                                         <th class="text-center align-middle">Pangkat</th>
                                         <th class="text-center align-middle">Jabatan</th>
                                         <th class="text-center align-middle">Waktu Kedatangan</th>
                                         <th class="text-center align-middle">Maskapai</th>
+                                        <th class="text-center align-middle">Tipe Kamar</th>
                                         <th class="text-center align-middle">Aksi</th>
                                     </tr>
                                 </thead>
@@ -75,8 +84,6 @@
                                                 </div>
 
                                             </td>
-                                            <td class="align-middle">{{ $item->status_kamar }}</td>
-                                            <td class="align-middle">{{ $item->ukuran_baju }}</td>
                                             <td class="align-middle">{{ $item->no_hp }}</td>
                                             <td class="align-middle">{{ $item->satker }}</td>
                                             <td class="text-center align-middle">{{ $item->pangkat }}</td>
@@ -93,6 +100,19 @@
                                                 @endif
                                             </td>
                                             <td class="align-middle">{{ $item->maskapai }}</td>
+                                            <td class="text-center align-middle">
+                                                @if ($item->status_kamar == 'Single')
+                                                    <span class="badge bg-success">
+                                                        Single
+                                                    </span>
+                                                @elseif ($item->status_kamar == 'Twin')
+                                                    <span class="badge bg-info">
+                                                        Twin
+                                                    </span>
+                                                @else
+                                                    Belum dipilih
+                                                @endif
+                                            </td>
                                             <td class="text-center align-middle">
 
                                                 <div class="d-flex justify-content-center gap-2">
@@ -128,43 +148,55 @@
                 @csrf
                 <div class="modal-content">
                     <div class="modal-header bg-primary text-white">
-                        <h5 class="modal-title">Tambah Peserta</h5>
+                        <h5 class="modal-title text-white">Tambah Peserta</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                     </div>
 
                     <div class="modal-body">
-
                         <div class="row">
+
+                            <!-- IDENTITAS -->
                             <div class="col-md-6 mb-3">
                                 <label>Nama <span class="text-danger">*</span></label>
-                                <input type="text" name="nama" class="form-control" required>
+                                <input type="text" name="nama" class="form-control" placeholder="Masukkan nama" required>
+                            </div>
+
+                            <div class="col-md-6 mb-3">
+                                <label>Gender</label>
+                                <select name="gender" class="form-control">
+                                    <option value="">:: Pilih Gender ::</option>
+                                    <option value="Laki-laki">Laki-laki</option>
+                                    <option value="Perempuan">Perempuan</option>
+                                </select>
                             </div>
 
                             <div class="col-md-6 mb-3">
                                 <label>NIP <span class="text-danger">*</span></label>
-                                <input type="text" name="nip" class="form-control" required>
+                                <input type="text" name="nip" class="form-control" placeholder="Masukkan NIP" required>
                             </div>
 
                             <div class="col-md-6 mb-3">
                                 <label>No HP <span class="text-danger">*</span></label>
-                                <input type="text" name="no_hp" class="form-control" required>
+                                <input type="text" name="no_hp" class="form-control" placeholder="Masukkan nomor handphone" required>
                             </div>
 
+                            <!-- JABATAN -->
                             <div class="col-md-6 mb-3">
                                 <label>Pangkat <span class="text-danger">*</span></label>
-                                <input type="text" name="pangkat" class="form-control" required>
+                                <input type="text" name="pangkat" class="form-control" placeholder="Masukkan pangkat" required>
                             </div>
 
                             <div class="col-md-6 mb-3">
                                 <label>Jabatan <span class="text-danger">*</span></label>
-                                <input type="text" name="jabatan" class="form-control" required>
+                                <input type="text" name="jabatan" class="form-control" placeholder="Masukkan Jabatan" required>
                             </div>
 
                             <div class="col-md-6 mb-3">
                                 <label>Satuan Kerja <span class="text-danger">*</span></label>
-                                <input type="text" name="satker" class="form-control" required>
+                                <input type="text" name="satker" class="form-control" placeholder="Masukkan satuan kerja" required>
                             </div>
 
+                            <!-- PERJALANAN -->
                             <div class="col-md-6 mb-3">
                                 <label>Tanggal Kedatangan</label>
                                 <input type="date" name="tanggal_kedatangan" class="form-control">
@@ -177,8 +209,8 @@
 
                             <div class="col-md-6 mb-3">
                                 <label>Maskapai</label>
-                                <select name="maskapai" class="form-control" value="{{ old('maskapai') }}">
-                                    <option value=""></option>
+                                <select name="maskapai" class="form-control">
+                                    <option value="">:: Pilih Maskapai ::</option>
                                     <option value="Garuda Indonesia">Garuda Indonesia</option>
                                     <option value="Citilink">Citilink</option>
                                     <option value="Lion Air">Lion Air</option>
@@ -193,19 +225,63 @@
                                 </select>
                             </div>
 
+                            <!-- KAMAR -->
+                            <div class="col-md-6 mb-3">
+                                <label>Tipe Kamar</label>
+                                <select name="status_kamar" id="add_status_kamar" class="form-control">
+                                    <option value="">:: Pilih Tipe Kamar ::</option>
+                                    <option value="Single">Single</option>
+                                    <option value="Twin">Twin</option>
+                                </select>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="row">
+                                    <div class="col-6">
+                                        <label>Biaya/Malam (Single)</label>
+                                        <input type="text" id="add_biaya_malam" value="Single (Rp. 1.400.000)" readonly
+                                            class="form-control">
+                                    </div>
+                                    <div class="col-6">
+                                        <label>Biaya/Malam (Twin)</label>
+                                        <input type="text" id="add_biaya_malam2" value="Twin (Rp. 800.000)" readonly
+                                            class="form-control">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6 mb-3">
+                                <div class="row">
+                                    <div class="col-6">
+                                        <label>Jumlah Malam</label>
+                                        <input type="text" name="jumlah_malam" value="2 Malam" readonly
+                                            class="form-control">
+                                    </div>
+                                    <div class="col-6">
+                                        <label>Total Biaya</label>
+                                        <input type="text" name="total" id="add_total" readonly value="Rp. 0" class="form-control">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6"></div>
+
+                            <!-- UPLOAD -->
                             <div class="col-md-6 mb-3">
                                 <label>Foto</label>
-                                <input type="file" name="foto" class="form-control" accept="image/*">
+                                <input type="file" name="foto" class="form-control"
+                                    accept="image/*,application/pdf">
                             </div>
 
                             <div class="col-md-6 mb-3">
                                 <label>Bukti Pembayaran</label>
-                                <input type="file" name="bb" class="form-control" accept="image/*">
+                                <input type="file" name="bb" class="form-control"
+                                    accept="image/*,application/pdf">
                             </div>
 
                         </div>
-
                     </div>
+
 
                     <div class="modal-footer">
                         <button type="submit" class="btn btn-primary">Simpan</button>
@@ -234,10 +310,18 @@
                         <input type="hidden" id="edit_id" name="id">
 
                         <div class="row g-3">
-
                             <div class="col-md-6">
                                 <label>Nama *</label>
                                 <input type="text" name="nama" id="edit_nama" class="form-control">
+                            </div>
+
+                            <div class="col-md-6 mb-3">
+                                <label>Gender *</label>
+                                <select name="gender" class="form-control" id="edit_gender">
+                                    <option value=""></option>
+                                    <option value="Laki-laki">Laki-laki</option>
+                                    <option value="Perempuan">Perempuan</option>
+                                </select>
                             </div>
 
                             <div class="col-md-6">
@@ -277,8 +361,7 @@
 
                             <div class="col-md-6">
                                 <label>Maskapai</label>
-                                <select name="maskapai" id="edit_maskapai" class="form-control"
-                                    value="{{ old('maskapai') }}">
+                                <select name="maskapai" id="edit_maskapai" class="form-control">
                                     <option value=""></option>
                                     <option value="Garuda Indonesia">Garuda Indonesia</option>
                                     <option value="Citilink">Citilink</option>
@@ -302,14 +385,46 @@
                                 </select>
                             </div>
 
-                            <div class="col-md-12">
+                            <div class="col-md-6">
+                                <div class="row">
+                                    <div class="col-6">
+                                        <label>Biaya/Malam (Single)</label>
+                                        <input type="text" id="biaya_malam" value="Single (Rp. 1.400.000)" readonly
+                                            class="form-control">
+                                    </div>
+                                    <div class="col-6">
+                                        <label>Biaya/Malam (Twin)</label>
+                                        <input type="text" id="biaya_malam2" value="Twin (Rp. 800.000)" readonly
+                                            class="form-control">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="row">
+                                    <div class="col-6">
+                                        <label>Jumlah Malam</label>
+                                        <input type="text" id="jumlah_malam" value="2 Malam" readonly
+                                            class="form-control">
+                                    </div>
+                                    <div class="col-6">
+                                        <label>Total Biaya</label>
+                                        <input type="text" id="total" readonly class="form-control">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6"></div>
+
+                            <div class="col-md-6">
                                 <label>Foto</label>
                                 <input type="file" name="foto" class="form-control">
                             </div>
 
                             <div class="col-md-6 mb-3">
                                 <label>Bukti Pembayaran</label>
-                                <input type="file" name="edit_bb" class="form-control" accept="image/*">
+                                <input type="file" name="edit_bb" class="form-control"
+                                    accept="image/*,application/pdf">
                             </div>
 
                         </div>
@@ -362,6 +477,8 @@
                             showConfirmButton: false
                         });
 
+                        console.log(response.message);
+
                         $("#modalTambahKamar").modal('hide');
 
                         setTimeout(() => {
@@ -406,6 +523,7 @@
                     success: function(res) {
 
                         $("#edit_id").val(res.id);
+                        $("#edit_gender").val(res.gender);
                         $("#edit_nama").val(res.nama);
                         $("#edit_nip").val(res.nip);
                         $("#edit_no_hp").val(res.no_hp);
@@ -416,6 +534,20 @@
                         $("#edit_jam").val(res.jam_kedatangan);
                         $("#edit_maskapai").val(res.maskapai);
                         $("#edit_status_kamar").val(res.status_kamar);
+
+                        if (res.status_kamar == "Single") {
+                            $("#biaya_malam").addClass("input-active");
+                            $("#biaya_malam2").removeClass("input-active");
+                            $("#total").val("Rp. 2.800.000")
+                        } else if (res.status_kamar == "Twin") {
+                            $("#biaya_malam2").addClass("input-active");
+                            $("#biaya_malam").removeClass("input-active");
+                            $("#total").val("Rp. 1.600.000")
+                        } else {
+                            $("#biaya_malam2").removeClass("input-active");
+                            $("#biaya_malam").removeClass("input-active");
+                            $("#total").val("Rp. 0")
+                        }
 
                         $("#modalEditPeserta").modal("show");
                     },
@@ -548,6 +680,42 @@
                     });
 
             });
+
+            $("#edit_status_kamar").on("change", function() {
+                let val = $(this).val();
+
+                if (val == "Single") {
+                    $("#biaya_malam").addClass("input-active");
+                    $("#biaya_malam2").removeClass("input-active");
+                    $("#total").val("Rp. 2.800.000");
+                } else if (val == "Twin") {
+                    $("#biaya_malam2").addClass("input-active");
+                    $("#biaya_malam").removeClass("input-active");
+                    $("#total").val("Rp. 1.600.000");
+                } else {
+                    $("#biaya_malam2").removeClass("input-active");
+                    $("#biaya_malam").removeClass("input-active");
+                    $("#total").val("Rp. 0");
+                }
+            })
+
+            $("#add_status_kamar").on("change", function() {
+                let val = $(this).val();
+
+                if (val == "Single") {
+                    $("#add_biaya_malam").addClass("input-active");
+                    $("#add_biaya_malam2").removeClass("input-active");
+                    $("#add_total").val("Rp. 2.800.000");
+                } else if (val == "Twin") {
+                    $("#add_biaya_malam2").addClass("input-active");
+                    $("#add_biaya_malam").removeClass("input-active");
+                    $("#add_total").val("Rp. 1.600.000");
+                } else {
+                    $("#add_biaya_malam2").removeClass("input-active");
+                    $("#add_biaya_malam").removeClass("input-active");
+                    $("#add_total").val("Rp. 0");
+                }
+            })
 
         });
     </script>

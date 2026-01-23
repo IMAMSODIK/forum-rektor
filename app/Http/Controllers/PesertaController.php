@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Peserta;
 use App\Http\Requests\StorePesertaRequest;
 use App\Http\Requests\UpdatePesertaRequest;
+use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -22,49 +23,59 @@ class PesertaController extends Controller
 
     public function store(Request $request)
     {
-        $request->validate([
-            'nama' => 'required|string|max:255',
-            'nip' => 'required|string|max:20|unique:pesertas,nip',
-            'no_hp' => 'required|string|max:20|unique:pesertas,no_hp',
-            'pangkat' => 'required|string|max:255',
-            'jabatan' => 'required|string|max:255',
-            'satker' => 'required|string|max:255',
-            'tanggal_kedatangan' => 'nullable|date',
-            'jam_kedatangan' => 'nullable',
-            'maskapai' => 'nullable|string|max:255',
-            'foto' => 'nullable|image|max:2048',
-            'bb' => 'nullable|image|max:2048',
-        ]);
+        try {
+            $request->validate([
+                'nama' => 'required|string|max:255',
+                'gender' => 'required|string|max:255',
+                'status_kamar' => 'required|string|max:255',
+                'nip' => 'required|string|max:20|unique:pesertas,nip',
+                'no_hp' => 'required|string|max:20|unique:pesertas,no_hp',
+                'pangkat' => 'required|string|max:255',
+                'jabatan' => 'required|string|max:255',
+                'satker' => 'required|string|max:255',
+                'tanggal_kedatangan' => 'nullable|date',
+                'jam_kedatangan' => 'nullable',
+                'maskapai' => 'nullable|string|max:255',
+                'foto' => 'nullable|image|max:2048',
+                'bb' => 'nullable|image|max:2048',
+            ]);
 
-        $foto = null;
-        $bb = null;
-        if ($request->hasFile('foto')) {
-            $foto = $request->file('foto')->store('foto_peserta', 'public');
+            $foto = null;
+            $bb = null;
+            if ($request->hasFile('foto')) {
+                $foto = $request->file('foto')->store('foto_peserta', 'public');
+            }
+
+            if ($request->hasFile('bb')) {
+                $bb = $request->file('bb')->store('bukti_bayar', 'public');
+            }
+
+            Peserta::create([
+                'nama' => $request->nama,
+                'status_kamar' => $request->status_kamar,
+                'gender' => $request->gender,
+                'nip' => $request->nip,
+                'no_hp' => $request->no_hp,
+                'pangkat' => $request->pangkat,
+                'jabatan' => $request->jabatan,
+                'satker' => $request->satker,
+                'tanggal_kedatangan' => $request->tanggal_kedatangan,
+                'jam_kedatangan' => $request->jam_kedatangan,
+                'maskapai' => $request->maskapai,
+                'foto' => $foto,
+                'bb' => $bb,
+            ]);
+
+            return response()->json([
+                'status' => 'success',
+                'message' => 'Data peserta berhasil ditambahkan.'
+            ]);
+        } catch (Exception $e) {
+            return response()->json([
+                'status' => 'error',
+                'message' => $e->getMessage()
+            ]);
         }
-
-        if ($request->hasFile('bb')) {
-            $bb = $request->file('bb')->store('bukti_bayar', 'public');
-        }
-
-        Peserta::create([
-            'nama' => $request->nama,
-            'gender' => $request->gender,
-            'nip' => $request->nip,
-            'no_hp' => $request->no_hp,
-            'pangkat' => $request->pangkat,
-            'jabatan' => $request->jabatan,
-            'satker' => $request->satker,
-            'tanggal_kedatangan' => $request->tanggal_kedatangan,
-            'jam_kedatangan' => $request->jam_kedatangan,
-            'maskapai' => $request->maskapai,
-            'foto' => $foto,
-            'bb' => $bb,
-        ]);
-
-        return response()->json([
-            'status' => 'success',
-            'message' => 'Data peserta berhasil ditambahkan.'
-        ]);
     }
 
     public function edit(Request $request)
@@ -103,6 +114,7 @@ class PesertaController extends Controller
 
             // ====== Update Text Fields ======
             $peserta->nama = $request->nama;
+            $peserta->gender = $request->gender;
             $peserta->nip = $request->nip;
             $peserta->no_hp = $request->no_hp;
             $peserta->pangkat = $request->pangkat;

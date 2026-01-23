@@ -2,14 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\PengaturanKamar;
+use App\Models\PengaturanKamar as PK;
 use App\Http\Requests\StorePengaturanKamarRequest;
 use App\Http\Requests\UpdatePengaturanKamarRequest;
 use App\Models\Kamar;
 use App\Models\Peserta;
 use Illuminate\Http\Request;
 
-class PengaturanKamarController extends Controller
+class PengaturanKamar extends Controller
 {
     public function index()
     {
