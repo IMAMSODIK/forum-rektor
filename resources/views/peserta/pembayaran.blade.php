@@ -89,38 +89,61 @@
                                             </td>
                                             <td class="text-center align-middle">
                                                 @if ($item->status_kamar == 'Single')
-                                                    {{ 'Rp. ' . number_format($item->jumlah_malam * 930000, 0, ',', '.') }}
+                                                    RP 2.800.000
                                                 @else
-                                                    {{ 'Rp. ' . number_format($item->jumlah_malam * 699000, 0, ',', '.') }}
+                                                    RP 1.600.000
                                                 @endif
                                             </td>
                                             <td class="text-center align-middle">
-                                                @if ($item->bb)
+                                                @if ($item->status_bayar)
                                                     <span class="badge bg-success">
-                                                        Sudah Bayar
+                                                        Sudah Verifikasi
                                                     </span>
                                                 @else
                                                     <span class="badge bg-danger">
-                                                        Belum Bayar
+                                                        Belum Verifikasi
                                                     </span>
                                                 @endif
                                             </td>
                                             <td class="text-center align-middle">
                                                 @if ($item->bb)
-                                                    <img width="70%"
-                                                        src="{{ asset('storage') . '/' . $item->bb }}"
-                                                        class="img-fluid rounded bukti-bayar-preview"
-                                                        data-img="{{ asset('storage') . '/' . $item->bb }}"
-                                                        style="cursor: pointer;" alt="bukti bayar">
+                                                    @php
+                                                        $ext = strtolower(pathinfo($item->bb, PATHINFO_EXTENSION));
+                                                        $fileUrl = asset('storage/' . $item->bb);
+                                                    @endphp
+
+                                                    {{-- JIKA PDF --}}
+                                                    @if ($ext === 'pdf')
+                                                        <button type="button" class="btn btn-sm btn-primary preview-pdf"
+                                                            data-pdf="{{ $fileUrl }}">
+                                                            <i class="fas fa-file-pdf"></i> Preview
+                                                        </button>
+
+                                                        {{-- JIKA GAMBAR --}}
+                                                    @else
+                                                        <img width="70%" src="{{ $fileUrl }}"
+                                                            class="img-fluid rounded bukti-bayar-preview"
+                                                            data-img="{{ $fileUrl }}" style="cursor: pointer;"
+                                                            alt="Bukti Bayar">
+                                                    @endif
                                                 @else
                                                     {{ $item->metode_bayar }}
                                                 @endif
                                             </td>
 
                                             <td class="text-center">
-                                                <button class="btn btn-warning btn-sm edit" data-id="{{ $item->id }}">
+                                                {{-- <button class="btn btn-warning btn-sm edit" data-id="{{ $item->id }}">
                                                     Edit
-                                                </button>
+                                                </button> --}}
+                                                @if ($item->status_bayar)
+                                                    <button class="btn btn-danger btn-sm verif" data-aksi="0" data-id="{{ $item->id }}">
+                                                        Batal Verifikasi
+                                                    </button>
+                                                @else
+                                                    <button class="btn btn-success btn-sm verif" data-aksi="1" data-id="{{ $item->id }}">
+                                                        Verifikasi
+                                                    </button>
+                                                @endif
                                             </td>
 
                                         </tr>
@@ -134,6 +157,24 @@
             </div>
         </div>
     </div>
+
+    <div class="modal fade" id="pdfPreviewModal" tabindex="-1">
+        <div class="modal-dialog modal-xl modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">
+                        <i class="fas fa-file-pdf text-danger"></i> Preview Bukti Bayar
+                    </h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body p-0">
+                    <iframe id="pdfFrame" src="" width="100%" height="600px" style="border:none;">
+                    </iframe>
+                </div>
+            </div>
+        </div>
+    </div>
+
 
     <!-- Modal Preview Bukti Bayar -->
     <div class="modal fade" id="previewBuktiBayarModal" tabindex="-1" aria-hidden="true">
@@ -281,7 +322,6 @@
                 });
             });
 
-
             // Simpan
             $('#saveAbsensi').on('click', function() {
 
@@ -329,6 +369,34 @@
 
             });
 
+            $(document).on("click", ".verif", function() {
+                let id = $(this).data('id');
+                let aksi = $(this).data('aksi')
+                let formData = new FormData();
+                formData.append('_token', $('meta[name="csrf-token"]').attr('content'));
+                formData.append('aksi', aksi);
+
+                $.ajax({
+                    url: "/pembayaran/verifikasi/" + id,
+                    type: "POST",
+                    data: formData,
+                    processData: false,
+                    contentType: false,
+                    success: function(res) {
+                        if (res.status) {
+                            Swal.fire("Berhasil", res.message, "success").then(() => location
+                                .reload());
+                        } else {
+                            Swal.fire("Error", res.message, "error");
+                        }
+                    },
+                    error: function() {
+                        Swal.fire("Error", "Gagal melakukan verifikasi", "error");
+                    }
+                });
+
+            });
+
 
         });
 
@@ -340,5 +408,16 @@
             let modal = new bootstrap.Modal(document.getElementById('previewBuktiBayarModal'));
             modal.show();
         });
+
+        document.addEventListener('click', function (e) {
+            if (e.target.closest('.preview-pdf')) {
+                const btn = e.target.closest('.preview-pdf');
+                const pdfUrl = btn.getAttribute('data-pdf');
+
+                document.getElementById('pdfFrame').src = pdfUrl;
+                new bootstrap.Modal(document.getElementById('pdfPreviewModal')).show();
+            }
+        });
     </script>
+
 @endsection

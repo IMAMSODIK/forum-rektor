@@ -1,10 +1,21 @@
 <?php
 
+use App\Http\Controllers\AbsensiNarasumberController;
+use App\Http\Controllers\AbsensiPesertaController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\DokumentasiController;
+use App\Http\Controllers\KamarController;
+use App\Http\Controllers\KitController;
+use App\Http\Controllers\MateriRapatController;
+use App\Http\Controllers\MonitorController;
+use App\Http\Controllers\NarasumberController;
 use App\Http\Controllers\PembayaranController;
 use App\Http\Controllers\PendaftaranController;
 use App\Http\Controllers\PesertaController;
+use App\Http\Controllers\RegistrasiNarasumberController;
+use App\Http\Controllers\RegistrasiPesertaController;
+use App\Models\PengaturanKamar;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -28,7 +39,82 @@ Route::middleware(['auth'])->group(function () {
 
     Route::get('/pembayaran', [PembayaranController::class, 'index']);
     Route::get('/pembayaran/get', [PembayaranController::class, 'getPembayaran']);
+    Route::post('/pembayaran/verifikasi/{id}', [PembayaranController::class, 'updatePembayaran']);
+
+    // after pendaftaran
+    Route::get('/data-kamar', [KamarController::class, 'index']);
+    Route::get('/data-kamar/edit', [KamarController::class, 'edit']);
+    Route::post('/data-kamar/store', [KamarController::class, 'store']);
+    Route::post('/data-kamar/update', [KamarController::class, 'update']);
+    Route::post('/data-kamar/delete', [KamarController::class, 'delete']);
+
+    Route::get('/materi-raker', [MateriRapatController::class, 'index']);
+    Route::post('/materi-raker/store', [MateriRapatController::class, 'store']);
+    Route::post('/materi-raker/delete', [MateriRapatController::class, 'delete']);
+
+    Route::get('/dokumentasi-raker', [DokumentasiController::class, 'index']);
+    Route::post('/dokumentasi-raker/store', [DokumentasiController::class, 'store']);
+    Route::post('/dokumentasi-raker/delete', [DokumentasiController::class, 'delete']);
+
+    Route::get('/pengaturan-kamar', [PengaturanKamar::class, 'index']);
+    Route::get('/pengaturan-kamar/edit', [PengaturanKamar::class, 'edit']);
+    Route::post('/pengaturan-kamar/update', [PengaturanKamar::class, 'update']);
+    Route::post('/pengaturan-kamar/kosongkan', [KamarController::class, 'kosongkan']);
+
+    Route::get('/daftar-peserta', [PesertaController::class, 'index']);
+    Route::get('/daftar-peserta/edit', [PesertaController::class, 'edit']);
+    Route::post('/daftar-peserta/store', [PesertaController::class, 'store']);
+    Route::post('/daftar-peserta/update/{id}', [PesertaController::class, 'update']);
+    Route::post('/daftar-peserta/delete', [PesertaController::class, 'delete']);
+
+    Route::get('/registrasi-peserta', [RegistrasiPesertaController::class, 'index']);
+    Route::get('/peserta/get-registrasi', [RegistrasiPesertaController::class, 'getRegistrasi']);
+    Route::post('/peserta/update-registrasi/{id}', [RegistrasiPesertaController::class, 'updateRegistrasi']);
+
+    Route::get('/absensi-peserta', [AbsensiPesertaController::class, 'index']);
+    Route::get('/absensi/get', [AbsensiPesertaController::class, 'getAbsensi']);
+    Route::post('/absensi/update/{id}', [AbsensiPesertaController::class, 'updateAbsensi']);
+
+    Route::get('/pembayaran', [PembayaranController::class, 'index']);
+    Route::get('/pembayaran/get', [PembayaranController::class, 'getPembayaran']);
     Route::post('/pembayaran/update/{id}', [PembayaranController::class, 'updatePembayaran']);
+    
+    Route::get('/daftar-narasumber', [NarasumberController::class, 'index']);
+    Route::get('/daftar-narasumber/edit', [NarasumberController::class, 'edit']);
+    Route::post('/daftar-narasumber/store', [NarasumberController::class, 'store']);
+    Route::post('/daftar-narasumber/update/{id}', [NarasumberController::class, 'update']);
+    Route::post('/daftar-narasumber/delete', [NarasumberController::class, 'delete']);
+
+    Route::get('/registrasi-narasumber', [RegistrasiNarasumberController::class, 'index']);
+    Route::get('/absensi-narasumber', [AbsensiNarasumberController::class, 'index']);
+
+    Route::get('/kit-peserta', [KitController::class, 'index']);
+    Route::get('/kit-peserta/get', [KitController::class, 'edit']);
+    Route::put('/kit-peserta/update/{id}', [KitController::class, 'update']);
+    Route::put('/kit-peserta/reset/{id}', [KitController::class, 'resetKit']);
+
+    Route::get('/registrasi-test/check', [RegistrasiPesertaController::class, 'registrasiCheck']);
+    Route::post('/registrasi-test/check', [RegistrasiPesertaController::class, 'registrasiCheckProccess']);
+
+    Route::get('/absensi-test/check', [AbsensiPesertaController::class, 'absensiCheck']);
+    Route::post('/absensi-test/check', [AbsensiPesertaController::class, 'absensiCheckProccess']);
+
+    Route::get('/monitor-registrasi', [MonitorController::class, 'index']);
+    Route::get('/monitor-absensi', [MonitorController::class, 'absensi']);
+
+    Route::get('/monitor/registrasi/data', function () {
+        return \App\Models\Peserta::select('nama', 'nip', 'satker', 'time_registrasi')->orderBy('time_registrasi', 'DESC')->get();
+    })->name('monitor.registrasi.data');
+
+    Route::get('/monitor/absensi/data', function () {
+        return \App\Models\Peserta::select('nama', 'nip', 'satker', 'time_absensi3')->orderBy('time_absensi3', 'DESC')->get();
+        // return \App\Models\Peserta::select('nama', 'nip', 'satker', 'time_absensi2')->where('time_absensi2', null)->orderBy('time_absensi2', 'DESC')->get();
+    })->name('monitor.absensi.data');
+
+    // routes/web.php
+    Route::get('/export-kit', [App\Http\Controllers\KitController::class, 'exportPdf']);
+    Route::get('/export-registrasi', [App\Http\Controllers\KitController::class, 'exportPdfRegistrasi']);
+    Route::get('/export-absensi', [App\Http\Controllers\KitController::class, 'exportPdfAbsensi']);
 
     Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 });

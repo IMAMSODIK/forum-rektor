@@ -24,35 +24,23 @@ class PembayaranController extends Controller
         return response()->json($peserta);
     }
 
-
     public function updatePembayaran(Request $request, $id)
     {
         try {
             $peserta = Peserta::findOrFail($id);
 
-            if($peserta->time_registrasi){
-                $foto = null;
-                if ($request->hasFile('bukti_bayar')) {
-                    $foto = $request->file('bukti_bayar')->store('bukti_bayar', 'public');
-                }
-
-                $peserta->jumlah_malam = $request->jumlah_malam;
+            if($request->aksi == '1'){
                 $peserta->status_bayar = 1;
-                $peserta->metode_bayar = $request->metode_bayar;
-                $peserta->bb = $foto;
-
-                $peserta->save();
-
-                return response()->json([
-                    'status' => true,
-                    'message' => 'Absensi berhasil diperbarui'
-                ]);
             }else{
-                return response()->json([
-                    'status' => false,
-                    'message' => 'Peserta belum melakukan registrasi'
-                ]);
+                $peserta->status_bayar = 0;
             }
+            
+            $peserta->save();
+
+            return response()->json([
+                'status' => true,
+                'message' => 'Berhasil mengubah status verifikasi'
+            ]);
         } catch (\Exception $e) {
 
             return response()->json([

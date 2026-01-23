@@ -5,7 +5,7 @@
         <div class="page-title">
             <div class="row">
                 <div class="col-6">
-                    <h4>Daftar Peserta</h4>
+                    <h4>Daftar Narasumber</h4>
                 </div>
                 <div class="col-6">
                     <ol class="breadcrumb">
@@ -13,8 +13,8 @@
                                 <svg class="stroke-icon">
                                     <use href="{{ asset('dashboard_assets/assets/svg/icon-sprite.svg#stroke-home') }}"></use>
                                 </svg></a></li>
-                        <li class="breadcrumb-item">Daftar Peserta</li>
-                        <li class="breadcrumb-item active">Daftar Peserta</li>
+                        <li class="breadcrumb-item">Daftar Narasumber</li>
+                        <li class="breadcrumb-item active">Daftar Narasumber</li>
                     </ol>
                 </div>
             </div>
@@ -36,9 +36,7 @@
                                 <thead>
                                     <tr>
                                         <th class="text-center align-middle">No</th>
-                                        <th class="text-center align-middle">Peserta</th>
-                                        <th class="text-center align-middle">Tipe Kamar</th>
-                                        <th class="text-center align-middle">Ukuran Baju</th>
+                                        <th class="text-center align-middle">Narasumber</th>
                                         <th class="text-center align-middle">No. Handphone</th>
                                         <th class="text-center align-middle" style="width: 15%">Satuan Kerja</th>
                                         <th class="text-center align-middle">Pangkat</th>
@@ -56,11 +54,13 @@
                                             <td class="align-middle">
                                                 <div class="row align-items-center">
 
+                                                    <!-- Foto -->
                                                     <div class="col-4 text-center">
                                                         <img width="70%" src="{{ asset('storage') . '/' . $item->foto }}"
                                                             class="img-fluid rounded" alt="Foto">
                                                     </div>
 
+                                                    <!-- Nama & NIP -->
                                                     <div class="col-8">
                                                         <div class="row">
                                                             <div class="col-12">
@@ -75,8 +75,6 @@
                                                 </div>
 
                                             </td>
-                                            <td class="align-middle">{{ $item->status_kamar }}</td>
-                                            <td class="align-middle">{{ $item->ukuran_baju }}</td>
                                             <td class="align-middle">{{ $item->no_hp }}</td>
                                             <td class="align-middle">{{ $item->satker }}</td>
                                             <td class="text-center align-middle">{{ $item->pangkat }}</td>
@@ -128,7 +126,7 @@
                 @csrf
                 <div class="modal-content">
                     <div class="modal-header bg-primary text-white">
-                        <h5 class="modal-title">Tambah Peserta</h5>
+                        <h5 class="modal-title">Tambah Narasumber</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                     </div>
 
@@ -198,11 +196,6 @@
                                 <input type="file" name="foto" class="form-control" accept="image/*">
                             </div>
 
-                            <div class="col-md-6 mb-3">
-                                <label>Bukti Pembayaran</label>
-                                <input type="file" name="bb" class="form-control" accept="image/*">
-                            </div>
-
                         </div>
 
                     </div>
@@ -223,7 +216,7 @@
             <div class="modal-content">
 
                 <div class="modal-header">
-                    <h5 class="modal-title">Edit Data Peserta</h5>
+                    <h5 class="modal-title">Edit Data Narasumber</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                 </div>
 
@@ -295,21 +288,8 @@
                             </div>
 
                             <div class="col-md-6">
-                                <label>Tipe Kamar</label>
-                                <select name="status_kamar" id="edit_status_kamar" class="form-control">
-                                    <option value="Single">Single</option>
-                                    <option value="Twin">Twin</option>
-                                </select>
-                            </div>
-
-                            <div class="col-md-12">
                                 <label>Foto</label>
-                                <input type="file" name="foto" class="form-control">
-                            </div>
-
-                            <div class="col-md-6 mb-3">
-                                <label>Bukti Pembayaran</label>
-                                <input type="file" name="edit_bb" class="form-control" accept="image/*">
+                                <input type="file" name="edit_foto" class="form-control">
                             </div>
 
                         </div>
@@ -342,7 +322,7 @@
                 let formData = new FormData(this);
 
                 $.ajax({
-                    url: "/daftar-peserta/store",
+                    url: "/daftar-narasumber/store",
                     type: "POST",
                     data: formData,
                     contentType: false,
@@ -398,7 +378,7 @@
                 let id = $(this).data("id");
 
                 $.ajax({
-                    url: "/daftar-peserta/edit",
+                    url: "/daftar-narasumber/edit",
                     type: "GET",
                     data: {
                         id: id
@@ -415,7 +395,6 @@
                         $("#edit_tanggal").val(res.tanggal_kedatangan);
                         $("#edit_jam").val(res.jam_kedatangan);
                         $("#edit_maskapai").val(res.maskapai);
-                        $("#edit_status_kamar").val(res.status_kamar);
 
                         $("#modalEditPeserta").modal("show");
                     },
@@ -439,7 +418,7 @@
                 let formData = new FormData(this);
 
                 $.ajax({
-                    url: "/daftar-peserta/update/" + id,
+                    url: "/daftar-narasumber/update/" + id,
                     type: "POST",
                     data: formData,
                     contentType: false,
@@ -512,7 +491,7 @@
                         if (result.isConfirmed) {
 
                             $.ajax({
-                                url: "/daftar-peserta/delete",
+                                url: "/daftar-narasumber/delete",
                                 type: "POST",
                                 data: {
                                     _token: "{{ csrf_token() }}",

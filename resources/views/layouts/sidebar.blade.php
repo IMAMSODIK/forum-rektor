@@ -45,7 +45,7 @@
                         </svg><span class="lan-3">Dashboard </span></a>
                 </li>
 
-                {{-- <li class="sidebar-main-title">
+                <li class="sidebar-main-title">
                     <div>
                         <h6 class="">Master</h6>
                     </div>
@@ -63,7 +63,7 @@
                         <i class="fa fa-door-open text-white"></i>
                         <span class="">Pengaturan Kamar</span>
                 </a>
-                </li> --}}
+                </li>
 
                 <li class="sidebar-main-title">
                     <div>
@@ -78,12 +78,12 @@
                     </a>
                 </li>
 
-                {{-- <li class="sidebar-list">
+                <li class="sidebar-list">
                     <a class="sidebar-link sidebar-title" href="/registrasi-peserta">
                         <i class="fa fa-user-plus text-white"></i>
                         <span class="">Registrasi Peserta</span>
                     </a>
-                </li> --}}
+                </li>
 
                 <li class="sidebar-list">
                     <a class="sidebar-link sidebar-title" href="/pembayaran">
@@ -92,14 +92,14 @@
                     </a>
                 </li>
 
-                {{-- <li class="sidebar-list">
+                <li class="sidebar-list">
                     <a class="sidebar-link sidebar-title" href="/absensi-peserta">
                         <i class="fa fa-user-check text-white"></i>
                         <span class="">Absensi Peserta</span>
                     </a>
-                </li> --}}
+                </li>
 
-                {{-- <li class="sidebar-main-title">
+                <li class="sidebar-main-title">
                     <div>
                         <h6 class="">Data Narasumber</h6>
                     </div>
@@ -151,7 +151,7 @@
                         <i class="fa fa-box-open text-white"></i>
                         <span class="">Kit Peserta</span>
                     </a>
-                </li> --}}
+                </li>
 
             </ul>
             <div class="right-arrow" id="right-arrow"><i data-feather="arrow-right"></i></div>
