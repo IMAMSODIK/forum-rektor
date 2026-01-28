@@ -380,24 +380,30 @@
                             <div class="col-md-6">
                                 <label>Tipe Kamar</label>
                                 <select name="status_kamar" id="edit_status_kamar" class="form-control">
-                                    <option value="Single">Single</option>
-                                    <option value="Twin">Twin</option>
+                                    <option value="Single">Single | 1 kamar 1 orang - (harga 1 Orang /malam Rp.1.400.000)</option>
+                                    <option value="Twin">Twin | 1 kamar 2 orang - (harga 1 Orang /malam Rp.800.000)</option>
                                 </select>
                             </div>
 
                             <div class="col-md-6">
                                 <div class="row">
                                     <div class="col-6">
-                                        <label>Biaya/Malam (Single)</label>
+                                        <label>(Single) | 1 kamar 1 orang</label>
                                         <input type="text" id="biaya_malam" value="Single (Rp. 1.400.000)" readonly
                                             class="form-control">
                                     </div>
                                     <div class="col-6">
-                                        <label>Biaya/Malam (Twin)</label>
+                                        <label>(Twin) | 1 kamar 2 orang</label>
                                         <input type="text" id="biaya_malam2" value="Twin (Rp. 800.000)" readonly
                                             class="form-control">
                                     </div>
                                 </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <label>Jumlah Orang</label>
+                                <input type="text" id="jumlah_orang" value="1 Orang" readonly
+                                    class="form-control">
                             </div>
 
                             <div class="col-md-6">

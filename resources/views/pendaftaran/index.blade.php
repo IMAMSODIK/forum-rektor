@@ -737,12 +737,18 @@
                         <label class="required">Pilih Kamar</label>
                         <select name="kamar" id="kamar" class="form-control" value="{{ old('kamar') }}"
                             required>
-                            <option value="Single">Single | 1 Kamar • 1 Tamu • Rp 1.400.000/malam</option>
-                            <option value="Twin">Twin | 1 Kamar • 2 Tamu • Rp 800.000/malam</option>
+                            <option value="Single">Single | 1 kamar 1 orang - (harga 1 Orang /malam Rp.1.400.000)</option>
+                            <option value="Twin">Twin | 1 kamar 2 orang - (harga 1 Orang /malam Rp.800.000)</option>
                         </select>
                     </div>
 
+                    <div class="form-group">
+                        <label class="required">Jumlah Orang</label>
+                        <input type="text" value="1 Orang" readonly class="form-control">
+                    </div>
+
                     <div class="form-row-custom">
+
                         <div class="form-group acara">
                             <label class="required">Jumlah Malam</label>
                             <input type="text" value="2 Malam" readonly class="form-control">
