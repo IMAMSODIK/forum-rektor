@@ -23,7 +23,7 @@
 
     <div class="container-fluid">
         <div class="row size-column">
-            <div class="col-xl-12 col-sm-12">
+            <div class="col-xl-6 col-sm-6">
                 <div class="card o-hidden small-widget">
                     <div class="card-body total-project border-b-primary border-2"><span class="f-light f-w-500 f-14">Peserta Terdaftar</span>
                         <div class="project-details">
@@ -48,7 +48,7 @@
                     </div>
                 </div>
             </div>
-            {{-- <div class="col-xl-6 col-sm-6">
+            <div class="col-xl-6 col-sm-6">
                 <div class="card o-hidden small-widget">
                     <div class="card-body total-project border-b-primary border-2"><span class="f-light f-w-500 f-14">Peserta Teregistrasi</span>
                         <div class="project-details">
@@ -72,10 +72,10 @@
                         </ul>
                     </div>
                 </div>
-            </div> --}}
+            </div>
         </div>
-        {{-- <div class="row size-column">
-            <div class="col-xl-3 col-sm-6">
+        <div class="row size-column">
+            <div class="col-xl-4 col-sm-6">
                 <div class="card o-hidden small-widget">
                     <div class="card-body total-project border-b-warning border-2"><span class="f-light f-w-500 f-14">Absensi Hari 1</span>
                         <div class="project-details">
@@ -100,7 +100,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-xl-3 col-sm-6">
+            <div class="col-xl-4 col-sm-6">
                 <div class="card o-hidden small-widget">
                     <div class="card-body total-project border-b-secondary border-2"><span class="f-light f-w-500 f-14">Absensi Hari 2</span>
                         <div class="project-details">
@@ -125,7 +125,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-xl-3 col-sm-6">
+            <div class="col-xl-4 col-sm-6">
                 <div class="card o-hidden small-widget">
                     <div class="card-body total-project border-b-info border-2"><span class="f-light f-w-500 f-14">Absensi Hari 3</span>
                         <div class="project-details">
@@ -150,7 +150,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-xl-3 col-sm-6">
+            {{-- <div class="col-xl-3 col-sm-6">
                 <div class="card o-hidden small-widget">
                     <div class="card-body total-upcoming"><span class="f-light f-w-500 f-14">Absensi Hari 4</span>
                         <div class="project-details">
@@ -174,7 +174,7 @@
                         </ul>
                     </div>
                 </div>
-            </div>
-        </div> --}}
+            </div> --}}
+        </div>
     </div>
 @endsection

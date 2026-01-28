@@ -106,4 +106,22 @@ class KamarController extends Controller
             ], 500);
         }
     }
+
+    public function delete(Request $request)
+    {
+        $id = $request->id;
+
+        try {
+            $kamar = Kamar::findOrFail($id);
+            $kamar->delete();
+            
+            return response()->json([
+                'status' => true
+            ]);
+        } catch (\Exception $e) {
+            return response()->json([
+                'message' => 'Data tidak ditemukan'
+            ], 404);
+        }
+    }
 }
