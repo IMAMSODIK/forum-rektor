@@ -331,11 +331,11 @@
 
             <hr style="margin-bottom:30px;">
 
-            <label>Email</label>
+            {{-- <label>Email</label>
             <input type="email" id="email" name="email" required class="form-control">
 
             <label>Pendidikan Terakhir</label>
-            <input type="text" id="pt" name="pt" required class="form-control">
+            <input type="text" id="pt" name="pt" required class="form-control"> --}}
 
             <label>Tanda Tangan</label>
             <div style="width:100%; max-width:500px;">

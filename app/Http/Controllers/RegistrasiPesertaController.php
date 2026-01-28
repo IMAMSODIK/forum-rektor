@@ -68,8 +68,6 @@ class RegistrasiPesertaController extends Controller
             'nama' => 'required',
             'nip' => 'required',
             'satker' => 'required',
-            'email' => 'required',
-            'pt' => 'required',
             'tanda_tangan' => 'required',
         ], [
             'tanda_tangan.required' => 'Tanda tangan tidak boleh kosong.',
@@ -97,8 +95,6 @@ class RegistrasiPesertaController extends Controller
             // Update peserta, simpan path ttd dan waktu registrasi
             $peserta->update([
                 'time_registrasi' => now(),
-                'pendidikan_terkahir' => $request->pt,
-                'email' => $request->email,
                 'ttd' => 'storage/ttd/' . $ttdName,
             ]);
 
