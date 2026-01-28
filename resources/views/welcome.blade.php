@@ -433,11 +433,10 @@
                     <div class="hero-text">
                         <p class="hero-subtitle location"><i class="fas fa-map-marker-alt"></i> Grand City Hall Medan</p>
                         <p class="hero-subtitle date"><i class="fas fa-calendar-alt"></i> 30 Januari 2026</p>
-                    </div>
-
-                    <div class="d-flex flex-wrap">
-                        <a href="/registrasi" class="btn hero-btn">Registrasi</a>
-                        <a href="/absensi" class="btn hero-btn hero-btn-outline">Absensi</a>
+                        <div class="d-flex flex-wrap justify-content-center gap-2">
+                            <a href="/registrasi" class="btn hero-btn">Registrasi</a>
+                            <a href="/absensi" class="btn hero-btn hero-btn-outline">Absensi</a>
+                        </div>
                     </div>
                 </div>
                 <div class="col-lg-6 hero-image-container">
