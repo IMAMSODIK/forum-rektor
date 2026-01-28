@@ -47,8 +47,8 @@
                                     </tr>
                                     <tr>
                                         <th class="text-center align-middle">ID Card</th>
-                                        <th class="text-center align-middle">Topi</th>
-                                        <th class="text-center align-middle">Baju</th>
+                                        <th class="text-center align-middle">Goodie Bag</th>
+                                        <th class="text-center align-middle">Shall</th>
                                         <th class="text-center align-middle">Tas</th>
                                     </tr>
                                 </thead>
@@ -105,14 +105,14 @@
                                                 @endif
                                             </td>
                                             <td class="text-center align-middle">
-                                                @if ($item->kit && $item->kit->topi)
+                                                @if ($item->kit && $item->kit->goodie_bag)
                                                     <span class="badge bg-success">Sudah</span>
                                                 @else
                                                     <span class="badge bg-danger">Belum</span>
                                                 @endif
                                             </td>
                                             <td class="text-center align-middle">
-                                                @if ($item->kit && $item->kit->baju)
+                                                @if ($item->kit && $item->kit->shall)
                                                     <span class="badge bg-success">Sudah</span>
                                                 @else
                                                     <span class="badge bg-danger">Belum</span>
@@ -197,15 +197,15 @@
 
                             <div class="col-3">
                                 <label class="form-check">
-                                    <input class="form-check-input" type="checkbox" id="edit_topi">
-                                    Topi
+                                    <input class="form-check-input" type="checkbox" id="edit_goodie_bag">
+                                    Goodie Bag
                                 </label>
                             </div>
 
                             <div class="col-3">
                                 <label class="form-check">
-                                    <input class="form-check-input" type="checkbox" id="edit_baju">
-                                    Baju
+                                    <input class="form-check-input" type="checkbox" id="edit_shall">
+                                    Shall
                                 </label>
                             </div>
 
@@ -256,8 +256,8 @@
                         $("#edit_satker").val(res.satker);
 
                         $("#edit_id_card").prop("checked", res.kit?.id_card == 1);
-                        $("#edit_topi").prop("checked", res.kit?.topi == 1);
-                        $("#edit_baju").prop("checked", res.kit?.baju == 1);
+                        $("#edit_goodie_bag").prop("checked", res.kit?.goodie_bag == 1);
+                        $("#edit_shall").prop("checked", res.kit?.shall == 1);
                         $("#edit_tas").prop("checked", res.kit?.tas == 1);
 
                         $("#modalEdit").modal("show");
@@ -287,8 +287,8 @@
                                 nama: $("#edit_nama").val(),
                                 nip: $("#edit_nip").val(),
                                 id_card: $("#edit_id_card").is(":checked") ? 1 : 0,
-                                topi: $("#edit_topi").is(":checked") ? 1 : 0,
-                                baju: $("#edit_baju").is(":checked") ? 1 : 0,
+                                goodie_bag: $("#edit_goodie_bag").is(":checked") ? 1 : 0,
+                                shall: $("#edit_shall").is(":checked") ? 1 : 0,
                                 tas: $("#edit_tas").is(":checked") ? 1 : 0,
                                 _token: "{{ csrf_token() }}"
                             },

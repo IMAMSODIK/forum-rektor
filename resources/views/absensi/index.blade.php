@@ -243,6 +243,8 @@
             }
         }
     </style>
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 
 <body>
@@ -250,32 +252,46 @@
     <div class="container">
 
         @if (session('error'))
-            <div style="padding: 12px; background:#ffdddd; border-left:4px solid #e74c3c; margin-bottom:15px; border-radius:5px;">
-                {{ session('error') }}
-            </div>
+            <script>
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Gagal!',
+                    text: @json(session('error')),
+                    confirmButtonColor: '#e74c3c'
+                });
+            </script>
         @endif
 
         @if ($errors->any())
-            <div
-                style="padding: 12px; background:#fff3cd; border-left:4px solid #f1c40f; margin-bottom:15px; border-radius:5px;">
-                <strong>Periksa kembali input Anda:</strong>
-                <ul style="margin-top:8px; padding-left:20px;">
-                    @foreach ($errors->all() as $error)
-                        <li>{{ $error }}</li>
-                    @endforeach
-                </ul>
-            </div>
+            <script>
+                Swal.fire({
+                    icon: 'warning',
+                    title: 'Periksa kembali input Anda',
+                    html: `
+                        <ul style="text-align:left; margin-left:20px;">
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    `,
+                    confirmButtonColor: '#f1c40f'
+                });
+            </script>
         @endif
 
         @if (session('success'))
-            <div
-                style="padding: 12px; background:#d4edda; border-left:4px solid #27ae60; margin-bottom:15px; border-radius:5px;">
-                {{ session('success') }}
-            </div>
+            <script>
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Berhasil!',
+                    text: @json(session('success')),
+                    confirmButtonColor: '#27ae60'
+                });
+            </script>
         @endif
 
         <div class="flayer-section">
-            <img src="{{ asset('own_assets/images/flayer.jpeg') }}" alt="Flayer Acara" class="flayer-image">
+            <img src="{{ asset('own_assets/images/banner.png') }}" alt="Flayer Acara" class="flayer-image">
         </div>
 
         <div class="form-header">
@@ -335,7 +351,8 @@
             </div>
 
 
-            <button type="submit" style="padding:10px 20px; background:#27ae60; color:white; border:none; border-radius:6px; cursor:pointer; width:100%; margin-top:20px;">
+            <button type="submit"
+                style="padding:10px 20px; background:#27ae60; color:white; border:none; border-radius:6px; cursor:pointer; width:100%; margin-top:20px;">
                 Simpan Absensi Hari Ini
             </button>
         </form>
@@ -417,13 +434,40 @@
                 processData: false,
                 contentType: false,
                 success: function(res) {
-                    alert(res.message);
-                    location.reload();
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Berhasil!',
+                        text: res.message,
+                        confirmButtonColor: '#27ae60'
+                    });
+                    setTimeout(() => {
+                       location.reload(); 
+                    }, 1500);
                 },
-                error: function(err) {
-                    alert("Gagal menyimpan absensi!");
-                    console.log(err);
+                error: function(xhr) {
+                    let errors = xhr.responseJSON?.errors;
+                    let message = '';
+
+                    if (errors) {
+                        message = '<ul style="text-align:left; margin-left:20px;">';
+                        Object.keys(errors).forEach(function(key) {
+                            errors[key].forEach(function(err) {
+                                message += `<li>${err}</li>`;
+                            });
+                        });
+                        message += '</ul>';
+                    } else {
+                        message = '<p>Terjadi kesalahan saat menyimpan absensi.</p>';
+                    }
+
+                    Swal.fire({
+                        icon: 'warning',
+                        title: 'Gagal menyimpan absensi!',
+                        html: message,
+                        confirmButtonColor: '#f1c40f'
+                    });
                 }
+
             });
         });
     </script>

@@ -16,10 +16,18 @@ use App\Http\Controllers\PesertaController;
 use App\Http\Controllers\RegistrasiNarasumberController;
 use App\Http\Controllers\RegistrasiPesertaController;
 use App\Http\Controllers\PengaturanKamar;
+use App\Models\MateriRapat;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
-    return view('welcome');
+    $data = [
+        'pageTitle' => 'Welcome',
+        'peserta' => \App\Models\Peserta::with('kit')->get(),
+        'materi' => MateriRapat::all(),
+        'dokumentasi' => \App\Models\Dokumentasi::all(),
+    ];
+
+    return view('welcome', $data);
 });
 
 Route::get('/pendaftaran', [PendaftaranController::class, 'index']);
@@ -27,6 +35,12 @@ Route::post('/pendaftaran', [PendaftaranController::class, 'store']);
 
 Route::get('/pendaftaran-uinsu', [PendaftaranController::class, 'indexUinsu']);
 Route::post('/pendaftaran-uinsu', [PendaftaranController::class, 'storeUinsu']);
+
+Route::get('/registrasi', [RegistrasiPesertaController::class, 'registrasiCheck']);
+Route::post('/registrasi', [RegistrasiPesertaController::class, 'registrasiCheckProccess']);
+
+Route::get('/absensi', [AbsensiPesertaController::class, 'absensiCheck']);
+Route::post('/absensi', [AbsensiPesertaController::class, 'absensiCheckProccess']);
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index']); 

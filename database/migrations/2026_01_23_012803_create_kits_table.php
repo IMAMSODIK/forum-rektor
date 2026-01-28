@@ -13,6 +13,11 @@ return new class extends Migration
     {
         Schema::create('kits', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('peserta_id');
+            $table->boolean('id_card')->default(false);
+            $table->boolean('tas')->default(false);
+            $table->boolean('goodie_bag')->default(false);
+            $table->boolean('shall')->default(false);
             $table->timestamps();
         });
     }

@@ -131,7 +131,7 @@
 
         .hero-btn {
             background-color: white;
-            color: #02790f;
+            color: #345E8E;
             border-radius: 30px;
             padding: 12px 35px;
             font-weight: 600;
@@ -156,7 +156,7 @@
 
         .hero-btn-outline:hover {
             background-color: white;
-            color: #02790f;
+            color: #194e8b;
         }
 
         .hero-image-container {
@@ -215,7 +215,7 @@
         }
 
         .table th {
-            background-color: #02790f;
+            background-color: #345E8E;
             color: white;
             border: none;
             padding: 15px;
@@ -388,10 +388,10 @@
         <div class="container">
             <nav class="navbar navbar-expand-lg navbar-light">
                 <div class="container-fluid">
-                    {{-- <a class="navbar-brand logo" href="#">
+                    <a class="navbar-brand logo" href="#">
                         <img src="{{ asset('own_assets/images/banner.png') }}" alt="" width="75px"
                             srcset="">
-                    </a> --}}
+                    </a>
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
                         aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                         <span class="navbar-toggler-icon"></span>
@@ -436,8 +436,8 @@
                     </div>
 
                     <div class="d-flex flex-wrap">
-                        {{-- <a href="/registrasi" class="btn hero-btn">Registrasi</a>
-                        <a href="/absensi" class="btn hero-btn hero-btn-outline">Absensi</a> --}}
+                        <a href="/registrasi" class="btn hero-btn">Registrasi</a>
+                        <a href="/absensi" class="btn hero-btn hero-btn-outline">Absensi</a>
                     </div>
                 </div>
                 <div class="col-lg-6 hero-image-container">
@@ -448,7 +448,7 @@
     </section>
 
     <!-- Data Table Section -->
-    {{-- <section class="data-section">
+    <section class="data-section">
         <div class="container">
             <h2 class="section-title">Data Peserta</h2>
             <div class="table-container table-responsive">
@@ -515,9 +515,9 @@
                 </table>
             </div>
         </div>
-    </section> --}}
+    </section>
 
-    {{-- <section class="data-section">
+    <section class="data-section">
         <div class="container">
             <h2 class="section-title">Data Registrasi Peserta</h2>
             <div class="table-container table-responsive">
@@ -580,9 +580,9 @@
                 </table>
             </div>
         </div>
-    </section> --}}
+    </section>
 
-    {{-- <section class="data-section">
+    <section class="data-section">
         <div class="container">
             <h2 class="section-title">Data Absensi Peserta</h2>
             <div class="table-container table-responsive">
@@ -597,10 +597,9 @@
                             <th colspan="4" class="text-center align-middle">Absensi</th>
                         </tr>
                         <tr>
-                            <th class="text-center align-middle">24 Nov</th>
-                            <th class="text-center align-middle">25 Nov</th>
-                            <th class="text-center align-middle">26 Nov</th>
-                            <th class="text-center align-middle">27 Nov</th>
+                            <th class="text-center align-middle">29 Jan</th>
+                            <th class="text-center align-middle">30 Jan</th>
+                            <th class="text-center align-middle">01 Feb</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -676,17 +675,6 @@
                                     @endif
                                 </td>
 
-                                <td class="text-center align-middle">
-                                    @if ($p->time_absensi4)
-                                        <span class="badge bg-success">
-                                            Hadir<br>
-                                            <small>{{ \Carbon\Carbon::parse($p->time_absensi4)->format('H:i') }}</small>
-                                        </span>
-                                    @else
-                                        <span class="badge bg-danger">Belum</span>
-                                    @endif
-                                </td>
-
                             </tr>
                         @endforeach
 
@@ -695,9 +683,9 @@
                 </table>
             </div>
         </div>
-    </section> --}}
+    </section>
 
-    {{-- <section class="data-section">
+    <section class="data-section">
         <div class="container">
             <h2 class="section-title">Data Kit Peserta</h2>
             <div class="table-container table-responsive">
@@ -712,9 +700,9 @@
                             <th colspan="4" class="text-center align-middle">Kit</th>
                         </tr>
                         <tr>
-                            <th class="teMaxt-center align-middle">ID Card</th>
-                            <th class="text-center align-middle">Topi</th>
-                            <th class="text-center align-middle">Baju</th>
+                            <th class="text-center align-middle">ID Card</th>
+                            <th class="text-center align-middle">Goodie Bag</th>
+                            <th class="text-center align-middle">Shall</th>
                             <th class="text-center align-middle">Tas</th>
                         </tr>
                     </thead>
@@ -757,7 +745,7 @@
                                 </td>
 
                                 <td class="text-center align-middle">
-                                    @if ($item->kit && $item->kit->topi)
+                                    @if ($item->kit && $item->kit->goodie_bag)
                                         <span class="badge bg-success">Sudah</span>
                                     @else
                                         <span class="badge bg-danger">Belum</span>
@@ -765,7 +753,7 @@
                                 </td>
 
                                 <td class="text-center align-middle">
-                                    @if ($item->kit && $item->kit->baju)
+                                    @if ($item->kit && $item->kit->shall)
                                         <span class="badge bg-success">Sudah</span>
                                     @else
                                         <span class="badge bg-danger">Belum</span>
@@ -786,9 +774,9 @@
                 </table>
             </div>
         </div>
-    </section> --}}
+    </section>
 
-    {{-- <section class="data-section">
+    <section class="data-section">
         <div class="container">
             <h2 class="section-title mb-4">Data Materi</h2>
 
@@ -822,9 +810,9 @@
                 <div class="alert alert-info text-center">Belum ada materi</div>
             @endif
         </div>
-    </section> --}}
+    </section>
 
-    {{-- <section class="data-section">
+    <section class="data-section">
         <div class="container">
             <h2 class="section-title mb-4">Dokumentasi</h2>
 
@@ -852,7 +840,7 @@
             @endif
 
         </div>
-    </section> --}}
+    </section>
 
     <!-- Modal Preview Gambar -->
     <div class="modal fade" id="imageModal" tabindex="-1">
@@ -890,77 +878,77 @@
     <script>
         // Inisialisasi DataTable
         $(document).ready(function() {
-            // $('#dataTable').DataTable({
-            //     "language": {
-            //         "lengthMenu": "Tampilkan _MENU_ data per halaman",
-            //         "zeroRecords": "Data tidak ditemukan",
-            //         "info": "Menampilkan halaman _PAGE_ dari _PAGES_",
-            //         "infoEmpty": "Tidak ada data tersedia",
-            //         "infoFiltered": "(disaring dari _MAX_ total data)",
-            //         "search": "Cari:",
-            //         "paginate": {
-            //             "first": "Pertama",
-            //             "last": "Terakhir",
-            //             "next": "Selanjutnya",
-            //             "previous": "Sebelumnya"
-            //         }
-            //     },
-            //     "responsive": true
-            // });
+            $('#dataTable').DataTable({
+                "language": {
+                    "lengthMenu": "Tampilkan _MENU_ data per halaman",
+                    "zeroRecords": "Data tidak ditemukan",
+                    "info": "Menampilkan halaman _PAGE_ dari _PAGES_",
+                    "infoEmpty": "Tidak ada data tersedia",
+                    "infoFiltered": "(disaring dari _MAX_ total data)",
+                    "search": "Cari:",
+                    "paginate": {
+                        "first": "Pertama",
+                        "last": "Terakhir",
+                        "next": "Selanjutnya",
+                        "previous": "Sebelumnya"
+                    }
+                },
+                "responsive": true
+            });
 
-            // $('#dataTable2').DataTable({
-            //     "language": {
-            //         "lengthMenu": "Tampilkan _MENU_ data per halaman",
-            //         "zeroRecords": "Data tidak ditemukan",
-            //         "info": "Menampilkan halaman _PAGE_ dari _PAGES_",
-            //         "infoEmpty": "Tidak ada data tersedia",
-            //         "infoFiltered": "(disaring dari _MAX_ total data)",
-            //         "search": "Cari:",
-            //         "paginate": {
-            //             "first": "Pertama",
-            //             "last": "Terakhir",
-            //             "next": "Selanjutnya",
-            //             "previous": "Sebelumnya"
-            //         }
-            //     },
-            //     "responsive": true
-            // });
+            $('#dataTable2').DataTable({
+                "language": {
+                    "lengthMenu": "Tampilkan _MENU_ data per halaman",
+                    "zeroRecords": "Data tidak ditemukan",
+                    "info": "Menampilkan halaman _PAGE_ dari _PAGES_",
+                    "infoEmpty": "Tidak ada data tersedia",
+                    "infoFiltered": "(disaring dari _MAX_ total data)",
+                    "search": "Cari:",
+                    "paginate": {
+                        "first": "Pertama",
+                        "last": "Terakhir",
+                        "next": "Selanjutnya",
+                        "previous": "Sebelumnya"
+                    }
+                },
+                "responsive": true
+            });
 
-            // $('#dataTable3').DataTable({
-            //     "language": {
-            //         "lengthMenu": "Tampilkan _MENU_ data per halaman",
-            //         "zeroRecords": "Data tidak ditemukan",
-            //         "info": "Menampilkan halaman _PAGE_ dari _PAGES_",
-            //         "infoEmpty": "Tidak ada data tersedia",
-            //         "infoFiltered": "(disaring dari _MAX_ total data)",
-            //         "search": "Cari:",
-            //         "paginate": {
-            //             "first": "Pertama",
-            //             "last": "Terakhir",
-            //             "next": "Selanjutnya",
-            //             "previous": "Sebelumnya"
-            //         }
-            //     },
-            //     "responsive": true
-            // });
+            $('#dataTable3').DataTable({
+                "language": {
+                    "lengthMenu": "Tampilkan _MENU_ data per halaman",
+                    "zeroRecords": "Data tidak ditemukan",
+                    "info": "Menampilkan halaman _PAGE_ dari _PAGES_",
+                    "infoEmpty": "Tidak ada data tersedia",
+                    "infoFiltered": "(disaring dari _MAX_ total data)",
+                    "search": "Cari:",
+                    "paginate": {
+                        "first": "Pertama",
+                        "last": "Terakhir",
+                        "next": "Selanjutnya",
+                        "previous": "Sebelumnya"
+                    }
+                },
+                "responsive": true
+            });
 
-            // $('#dataTableKit').DataTable({
-            //     "language": {
-            //         "lengthMenu": "Tampilkan _MENU_ data per halaman",
-            //         "zeroRecords": "Data tidak ditemukan",
-            //         "info": "Menampilkan halaman _PAGE_ dari _PAGES_",
-            //         "infoEmpty": "Tidak ada data tersedia",
-            //         "infoFiltered": "(disaring dari _MAX_ total data)",
-            //         "search": "Cari:",
-            //         "paginate": {
-            //             "first": "Pertama",
-            //             "last": "Terakhir",
-            //             "next": "Selanjutnya",
-            //             "previous": "Sebelumnya"
-            //         }
-            //     },
-            //     "responsive": true
-            // });
+            $('#dataTableKit').DataTable({
+                "language": {
+                    "lengthMenu": "Tampilkan _MENU_ data per halaman",
+                    "zeroRecords": "Data tidak ditemukan",
+                    "info": "Menampilkan halaman _PAGE_ dari _PAGES_",
+                    "infoEmpty": "Tidak ada data tersedia",
+                    "infoFiltered": "(disaring dari _MAX_ total data)",
+                    "search": "Cari:",
+                    "paginate": {
+                        "first": "Pertama",
+                        "last": "Terakhir",
+                        "next": "Selanjutnya",
+                        "previous": "Sebelumnya"
+                    }
+                },
+                "responsive": true
+            });
         });
 
         // Navbar scroll effect

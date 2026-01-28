@@ -78,6 +78,12 @@ class AbsensiPesertaController extends Controller
             if($peserta->time_registrasi){
                 Storage::disk('public')->put('absensi/' . $imageName, base64_decode($image));
 
+                $peserta->time_absensi1 = now();
+                $peserta->foto_absensi1 = $imageName;
+
+                $peserta->time_absensi2 = now();
+                $peserta->foto_absensi2 = $imageName;
+
                 $peserta->time_absensi3 = now();
                 $peserta->foto_absensi3 = $imageName;
                 $peserta->save();

@@ -36,10 +36,9 @@
                                         <th>Satuan Kerja</th>
                                         <th>Pangkat</th>
                                         <th>Jabatan</th>
-                                        <th>24 Nov</th>
-                                        <th>25 Nov</th>
-                                        <th>26 Nov</th>
-                                        <th>27 Nov</th>
+                                        <th>29 Jan</th>
+                                        <th>30 Jan</th>
+                                        <th>01 Feb</th>
                                         <th>Aksi</th>
                                     </tr>
                                 </thead>

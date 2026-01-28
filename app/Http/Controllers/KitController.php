@@ -37,8 +37,8 @@ class KitController extends Controller
             if($peserta->time_registrasi){
                 $kit->update([
                     'id_card' => $request->id_card,
-                    'topi'    => $request->topi,
-                    'baju'    => $request->baju,
+                    'goodie_bag'    => $request->goodie_bag,
+                    'shall'    => $request->shall,
                     'tas'     => $request->tas,
                 ]);
 
@@ -88,8 +88,8 @@ class KitController extends Controller
             if ($kit) {
                 $kit->update([
                     'id_card' => false,
-                    'topi'    => false,
-                    'baju'    => false,
+                    'goodie_bag'    => false,
+                    'shall'    => false,
                     'tas'     => false,
                 ]);
             }

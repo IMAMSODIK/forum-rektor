@@ -217,6 +217,8 @@
         }
     </style>
 
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
 </head>
 
 <body>
@@ -224,39 +226,52 @@
     <div class="container">
 
         @if (session('error'))
-            <div
-                style="padding: 12px; background:#ffdddd; border-left:4px solid #e74c3c; margin-bottom:15px; border-radius:5px;">
-                {{ session('error') }}
-            </div>
+            <script>
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Gagal!',
+                    text: @json(session('error')),
+                    confirmButtonColor: '#e74c3c'
+                });
+            </script>
         @endif
 
         @if ($errors->any())
-            <div
-                style="padding: 12px; background:#fff3cd; border-left:4px solid #f1c40f; margin-bottom:15px; border-radius:5px;">
-                <strong>Periksa kembali input Anda:</strong>
-                <ul style="margin-top:8px; padding-left:20px;">
-                    @foreach ($errors->all() as $error)
-                        <li>{{ $error }}</li>
-                    @endforeach
-                </ul>
-            </div>
+            <script>
+                Swal.fire({
+                    icon: 'warning',
+                    title: 'Periksa kembali input Anda',
+                    html: `
+                        <ul style="text-align:left; margin-left:20px;">
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    `,
+                    confirmButtonColor: '#f1c40f'
+                });
+            </script>
         @endif
 
         @if (session('success'))
-            <div
-                style="padding: 12px; background:#d4edda; border-left:4px solid #27ae60; margin-bottom:15px; border-radius:5px;">
-                {{ session('success') }}
-            </div>
+            <script>
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Berhasil!',
+                    text: @json(session('success')),
+                    confirmButtonColor: '#27ae60'
+                });
+            </script>
         @endif
 
         <!-- 🔵 Flayer Paling Atas -->
         <div class="flayer-section">
-            <img src="{{ asset('own_assets/images/flayer.jpeg') }}" alt="Flayer Acara" class="flayer-image">
+            <img src="{{ asset('own_assets/images/banner.png') }}" alt="Flayer Acara" class="flayer-image">
         </div>
 
         <div class="form-header">
             <h1>Formulir Registrasi Peserta</h1>
-            <p>Silakan lengkapi data diri Anda dengan benar</p>
+            <p>Silakan lengkapi data diri Anda</p>
         </div>
 
         <div style="text-align:right; margin-bottom:20px;">
