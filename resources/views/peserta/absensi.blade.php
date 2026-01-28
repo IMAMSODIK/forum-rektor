@@ -90,18 +90,6 @@
                                             </td>
 
                                             <td class="text-center">
-                                                @if ($item->time_absensi4)
-                                                    <span class="badge bg-success">
-                                                        {{ \Carbon\Carbon::parse($item->time_absensi4)->format('d-m-Y H:i') }}
-                                                    </span>
-                                                @else
-                                                    <span class="badge bg-danger">Belum Absen</span>
-                                                @endif
-                                            </td>
-
-
-
-                                            <td class="text-center">
                                                 <button class="btn btn-warning btn-sm editAbsensi"
                                                     data-id="{{ $item->id }}">
                                                     Edit
