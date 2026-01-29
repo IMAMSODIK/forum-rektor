@@ -88,10 +88,14 @@
                                                 @endif
                                             </td>
                                             <td class="text-center align-middle">
-                                                @if ($item->status_kamar == 'Single')
-                                                    RP 2.800.000
+                                                @if ($item->satker == "UIN Sumatera Utara Medan")
+                                                    Rp. 0.00
                                                 @else
-                                                    RP 1.600.000
+                                                    @if ($item->status_kamar == 'Single')
+                                                        RP 2.800.000
+                                                    @else
+                                                        RP 1.600.000
+                                                    @endif
                                                 @endif
                                             </td>
                                             <td class="text-center align-middle">
