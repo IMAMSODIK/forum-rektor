@@ -224,24 +224,35 @@ class PesertaController extends Controller
         $callback = function () {
             $handle = fopen('php://output', 'w');
 
-            // Header kolom
-            fputcsv($handle, ['Nama', 'Kode', 'Satker']);
-
-            // Data
-            Peserta::with('kamar:id,no_kamar')
-    ->select('id', 'kamar_id', 'nama', 'nip', 'satker')
-    ->orderBy('nama')
-    ->chunk(200, function ($pesertas) use ($handle) {
-        foreach ($pesertas as $p) {
             fputcsv($handle, [
-                $p->nama,
-                $p->nip,
-                $p->satker,
-                $p->kamar?->no_kamar ?? '-'
+                'Nama',
+                'NIP',
+                'Satuan Kerja',
+                'Tipe Kamar',
+                'Nomor Kamar'
             ]);
-        }
-    });
 
+            Peserta::with('kamar:id,no_kamar')
+                ->select(
+                    'id',
+                    'kamar_id',
+                    'nama',
+                    'nip',
+                    'satker',
+                    'status_kamar'
+                )
+                ->orderBy('nama')
+                ->chunk(200, function ($pesertas) use ($handle) {
+                    foreach ($pesertas as $p) {
+                        fputcsv($handle, [
+                            $p->nama,
+                            $p->nip,
+                            $p->satker,
+                            $p->status_kamar ?? '-',
+                            $p->kamar?->no_kamar ?? '-',
+                        ]);
+                    }
+                });
 
             fclose($handle);
         };
