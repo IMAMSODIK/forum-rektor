@@ -164,7 +164,7 @@
 
             });
 
-            $('.edit').on('click', function() {
+            $(document).on('click', '.edit', function() {
 
                 let id = $(this).data('id');
 
