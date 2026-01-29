@@ -62,8 +62,8 @@ class PesertaController extends Controller
                 'tanggal_kedatangan' => $request->tanggal_kedatangan,
                 'jam_kedatangan' => $request->jam_kedatangan,
                 'maskapai' => $request->maskapai,
-                'foto' => $foto,
-                'bb' => $bb,
+                'foto' => 'required|file|mimetypes:image/jpeg,image/png,application/pdf|max:20000',
+                'edit_bb'   => 'required|file|mimetypes:image/jpeg,image/png,application/pdf|max:20000',
             ]);
 
             return response()->json([
@@ -107,7 +107,7 @@ class PesertaController extends Controller
                 'satker' => 'required',
                 'status_kamar' => 'required',
                 'foto' => 'required|file|mimetypes:image/jpeg,image/png,application/pdf|max:20000',
-                'bb'   => 'required|file|mimetypes:image/jpeg,image/png,application/pdf|max:20000',
+                'edit_bb'   => 'required|file|mimetypes:image/jpeg,image/png,application/pdf|max:20000',
             ]);
 
             $peserta = Peserta::findOrFail($id);
@@ -139,7 +139,7 @@ class PesertaController extends Controller
                 $peserta->foto = $foto;
             }
 
-            if ($request->hasFile('bb')) {
+            if ($request->hasFile('edit_bb')) {
 
                 // hapus foto lama jika ada
                 if ($peserta->bb && Storage::disk('public')->exists($peserta->bb)) {
