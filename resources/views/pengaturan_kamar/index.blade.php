@@ -31,6 +31,12 @@
                         </button>
                     </div> --}}
                     <div class="col-12">
+                        <div class="col-12 d-flex justify-content-end">
+                            <a href="{{ route('peserta.export.excel') }}"
+                                class="btn btn-success">
+                                Export Excel
+                            </a>
+                        </div>
                         <div class="table-responsive">
                             <table id="tableKamar" class="table table-bordered table-striped table-hover"
                                 style="width:100%">

@@ -6,8 +6,11 @@ use App\Models\Peserta;
 use App\Http\Requests\StorePesertaRequest;
 use App\Http\Requests\UpdatePesertaRequest;
 use Exception;
+use App\Exports\PesertaExport;
+use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Symfony\Component\HttpFoundation\StreamedResponse;
 
 class PesertaController extends Controller
 {
@@ -207,5 +210,42 @@ class PesertaController extends Controller
                 'message' => 'Terjadi kesalahan: ' . $e->getMessage()
             ], 500);
         }
+    }
+
+    public function exportExcel(): StreamedResponse
+    {
+        $filename = 'data_peserta.csv';
+
+        $headers = [
+            'Content-Type'        => 'text/csv',
+            'Content-Disposition' => "attachment; filename=\"$filename\"",
+        ];
+
+        $callback = function () {
+            $handle = fopen('php://output', 'w');
+
+            // Header kolom
+            fputcsv($handle, ['Nama', 'Kode', 'Satker']);
+
+            // Data
+            Peserta::with('kamar:id,no_kamar')
+    ->select('id', 'kamar_id', 'nama', 'nip', 'satker')
+    ->orderBy('nama')
+    ->chunk(200, function ($pesertas) use ($handle) {
+        foreach ($pesertas as $p) {
+            fputcsv($handle, [
+                $p->nama,
+                $p->nip,
+                $p->satker,
+                $p->kamar?->no_kamar ?? '-'
+            ]);
+        }
+    });
+
+
+            fclose($handle);
+        };
+
+        return response()->stream($callback, 200, $headers);
     }
 }

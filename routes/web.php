@@ -129,6 +129,9 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/export-kit', [App\Http\Controllers\KitController::class, 'exportPdf']);
     Route::get('/export-registrasi', [App\Http\Controllers\KitController::class, 'exportPdfRegistrasi']);
     Route::get('/export-absensi', [App\Http\Controllers\KitController::class, 'exportPdfAbsensi']);
+    Route::get('/peserta/export-excel', [PesertaController::class, 'exportExcel'])
+    ->name('peserta.export.excel');
+
 
     Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 });
