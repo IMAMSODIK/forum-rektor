@@ -106,8 +106,8 @@ class PesertaController extends Controller
                 'jabatan' => 'required',
                 'satker' => 'required',
                 'status_kamar' => 'required',
-                'foto' => 'nullable|image|max:2048',
-                'bb' => 'nullable|image|max:2048',
+                'foto' => 'required|file|mimetypes:image/jpeg,image/png,application/pdf|max:20000',
+                'bb'   => 'required|file|mimetypes:image/jpeg,image/png,application/pdf|max:20000',
             ]);
 
             $peserta = Peserta::findOrFail($id);

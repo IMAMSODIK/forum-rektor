@@ -24,7 +24,8 @@ class DatabaseSeeder extends Seeder
         ]);
 
         $this->call([
-            SatuanKerjaSeeder::class
+            SatuanKerjaSeeder::class,
+            // PesertaSeeder::class
         ]);
     }
 }

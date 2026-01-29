@@ -14,12 +14,12 @@ return new class extends Migration
         Schema::create('pesertas', function (Blueprint $table) {
             $table->id();
             $table->string('nama');
-            $table->string('nip', 20)->unique();
+            $table->string('nip', 20);
             $table->string('no_hp', 20)->unique();
             $table->string('pangkat');
             $table->string('jabatan');
             $table->string('satker');
-            $table->string('gender');
+            $table->string('gender')->nullable();
             $table->date('tanggal_kedatangan')->nullable();
             $table->time('jam_kedatangan')->nullable();
             $table->string('maskapai')->nullable();
