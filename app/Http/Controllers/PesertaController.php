@@ -62,8 +62,8 @@ class PesertaController extends Controller
                 'tanggal_kedatangan' => $request->tanggal_kedatangan,
                 'jam_kedatangan' => $request->jam_kedatangan,
                 'maskapai' => $request->maskapai,
-                'foto' => 'required|file|mimetypes:image/jpeg,image/png,application/pdf|max:20000',
-                'edit_bb'   => 'required|file|mimetypes:image/jpeg,image/png,application/pdf|max:20000',
+                'foto' => $foto,
+                'bb' => $bb,
             ]);
 
             return response()->json([
@@ -147,7 +147,7 @@ class PesertaController extends Controller
                 }
 
                 // simpan foto baru mengikuti format store()
-                $bb = $request->file('bb')->store('bukti_bayar', 'public');
+                $bb = $request->file('edit_bb')->store('bukti_bayar', 'public');
 
                 $peserta->bb = $bb;
             }
