@@ -212,6 +212,59 @@ class PesertaController extends Controller
         }
     }
 
+    public function exportExcelDaftarPeserta(): StreamedResponse
+    {
+        $filename = 'data_peserta.csv';
+
+        $headers = [
+            'Content-Type'        => 'text/csv',
+            'Content-Disposition' => "attachment; filename=\"$filename\"",
+        ];
+
+        $callback = function () {
+            $handle = fopen('php://output', 'w');
+
+            // Header kolom CSV
+            fputcsv($handle, [
+                'Nama',
+                'NIP',
+                'No HP',
+                'Pangkat',
+                'Jabatan',
+                'Satker'
+            ]);
+
+            Peserta::select(
+                'nama',
+                'nip',
+                'no_hp',
+                'pangkat',
+                'jabatan',
+                'satker'
+            )
+                ->where('satker', '!=', 'UIN Sumatera Utara Medan')
+                ->orderBy('nama')
+                ->chunk(200, function ($pesertas) use ($handle) {
+                    foreach ($pesertas as $p) {
+
+                        fputcsv($handle, [
+                            $p->nama,
+                            $p->nip,
+                            $p->no_hp,
+                            $p->pangkat,
+                            $p->jabatan,
+                            $p->satker
+                        ]);
+                    }
+                });
+
+            fclose($handle);
+        };
+
+        return response()->stream($callback, 200, $headers);
+    }
+
+
     public function exportExcel(): StreamedResponse
     {
         $filename = 'data_peserta.csv';

@@ -36,6 +36,10 @@
             <div class="card">
                 <div class="card-body">
                     <div class="col-12 mb-3 d-flex justify-content-end">
+                        <a href="{{ route('daftar-peserta.export.excel') }}"
+                            class="btn btn-success" style="margin-right: 10px">
+                            Export Data
+                        </a>
                         <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalTambahKamar">
                             Tambah Data
                         </button>
