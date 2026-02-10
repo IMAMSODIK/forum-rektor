@@ -143,6 +143,7 @@ class KitController extends Controller
     public function exportKitPdf()
     {
         $data = Peserta::with('kit')->get();
+        // dd($data[0]);
 
         $pdf = Pdf::loadView('kit.export', compact('data'))
             ->setPaper('A4', 'landscape');
