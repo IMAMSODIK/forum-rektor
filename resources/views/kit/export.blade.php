@@ -76,7 +76,7 @@
             <tr>
                 <th width="5%">No</th>
                 <th width="20%">Nama Peserta</th>
-                <th width="12%">No HP</th>
+                <th width="20%">NIP</th>
                 <th width="10%">ID Card</th>
                 <th width="10%">Goodie Bag</th>
                 <th width="10%">Shall</th>
@@ -90,8 +90,7 @@
                 <tr>
                     <td>{{ $i + 1 }}</td>
                     <td style="text-align:left">{{ $item->nama }}</td>
-                    <td>{{ $item->no_hp }}</td>
-
+                    <td style="text-align:left">{{ $item->nip }}</td>
                     <td class="check">{{ $item->kit && $item->kit->id_card ? 'V' : '-' }}</td>
                     <td class="check">{{ $item->kit && $item->kit->goodie_bag ? 'V' : '-' }}</td>
                     <td class="check">{{ $item->kit && $item->kit->shall ? 'V' : '-' }}</td>
