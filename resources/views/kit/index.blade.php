@@ -25,11 +25,13 @@
         <div class="row size-column">
             <div class="card">
                 <div class="card-body">
-                    {{-- <div class="col-12 mb-3 d-flex justify-content-end">
-                        <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalTambahKamar">
-                            Tambah Data
-                        </button>
-                    </div> --}}
+                    <div class="col-12 mb-3 d-flex justify-content-end">
+                        <div class="mb-3 text-end">
+                            <a href="{{ route('export.kit.pdf') }}" class="btn btn-success">
+                                Export Kit
+                            </a>
+                        </div>
+                    </div>
                     <div class="col-12">
                         <div class="table-container table-responsive">
                             <table id="dataTable" class="table table-striped table-hover" style="width:100%">
@@ -39,7 +41,8 @@
                                         <th class="text-center align-middle" rowspan="2">Peserta</th>
                                         <th class="text-center align-middle" rowspan="2">No. Handphone</th>
                                         <th class="text-center align-middle" rowspan="2">Status Registrasi</th>
-                                        <th class="text-center align-middle" rowspan="2" style="width: 15%">Satuan Kerja</th>
+                                        <th class="text-center align-middle" rowspan="2" style="width: 15%">Satuan Kerja
+                                        </th>
                                         <th class="text-center align-middle" rowspan="2">Pangkat</th>
                                         <th class="text-center align-middle" rowspan="2">Jabatan</th>
                                         <th class="text-center align-middle" colspan="4">Kit</th>
