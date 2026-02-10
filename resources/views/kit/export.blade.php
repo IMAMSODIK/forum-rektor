@@ -58,7 +58,7 @@
                 </td>
                 <td class="ttd">
                     @if($item->ttd)
-                        <img src="{{ asset('storage/ttd/'.$item->ttd) }}">
+                        <img src="{{ asset($item->ttd) }}">
                     @endif
                 </td>
             </tr>
