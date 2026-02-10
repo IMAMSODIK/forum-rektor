@@ -106,6 +106,8 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/kit-peserta/get', [KitController::class, 'edit']);
     Route::put('/kit-peserta/update/{id}', [KitController::class, 'update']);
     Route::put('/kit-peserta/reset/{id}', [KitController::class, 'resetKit']);
+    Route::get('/export-kit-pdf', [KitController::class, 'exportKitPdf'])->name('export.kit.pdf');
+
 
     Route::get('/registrasi-test/check', [RegistrasiPesertaController::class, 'registrasiCheck']);
     Route::post('/registrasi-test/check', [RegistrasiPesertaController::class, 'registrasiCheckProccess']);

@@ -34,7 +34,7 @@ class KitController extends Controller
             // KIT
             $kit = Kit::firstOrCreate(['peserta_id' => $peserta->id]);
 
-            if($peserta->time_registrasi){
+            if ($peserta->time_registrasi) {
                 $kit->update([
                     'id_card' => $request->id_card,
                     'goodie_bag'    => $request->goodie_bag,
@@ -46,7 +46,7 @@ class KitController extends Controller
                     'success' => true,
                     'message' => 'Data berhasil diperbarui.'
                 ]);
-            }else{
+            } else {
                 return response()->json([
                     'success' => false,
                     'message' => 'Peserta belum registrasi.'
@@ -138,5 +138,15 @@ class KitController extends Controller
         ])->setPaper('a4', 'landscape');
 
         return $pdf->stream('daftar-absensi-peserta.pdf');
+    }
+
+    public function exportKitPdf()
+    {
+        $data = Peserta::with('kit')->get();
+
+        $pdf = Pdf::loadView('kit.export', compact('data'))
+            ->setPaper('A4', 'landscape');
+
+        return $pdf->download('daftar-kit-peserta.pdf');
     }
 }
