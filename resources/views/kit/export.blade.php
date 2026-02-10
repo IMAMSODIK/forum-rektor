@@ -92,10 +92,10 @@
                     <td style="text-align:left">{{ $item->nama }}</td>
                     <td>{{ $item->no_hp }}</td>
 
-                    <td class="check">{{ $item->kit && $item->kit->id_card ? '✓' : '-' }}</td>
-                    <td class="check">{{ $item->kit && $item->kit->goodie_bag ? '✓' : '-' }}</td>
-                    <td class="check">{{ $item->kit && $item->kit->shall ? '✓' : '-' }}</td>
-                    <td class="check">{{ $item->kit && $item->kit->tas ? '✓' : '-' }}</td>
+                    <td class="check">{{ $item->kit && $item->kit->id_card ? 'V' : '-' }}</td>
+                    <td class="check">{{ $item->kit && $item->kit->goodie_bag ? 'V' : '-' }}</td>
+                    <td class="check">{{ $item->kit && $item->kit->shall ? 'V' : '-' }}</td>
+                    <td class="check">{{ $item->kit && $item->kit->tas ? 'V' : '-' }}</td>
 
                     <td class="ttd">
                         @if ($item->ttd)
